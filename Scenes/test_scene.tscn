@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=11 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerTopdown.cs" id="1_wsbew"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
@@ -14,6 +14,18 @@ size = Vector2(1172, 41)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
 size = Vector2(128, 128)
+
+[sub_resource type="Curve2D" id="Curve2D_51fmw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 163, 177, 0, 0, 0, 0, 44, 414, 0, 0, 0, 0, 199, 566, 0, 0, 0, 0, 438, 539, 0, 0, 0, 0, 480, 295, 0, 0, 0, 0, 163, 177)
+}
+point_count = 6
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_3h1ff"]
+vertices = PackedVector2Array(1226, -10, 1245, 743, -53, 698, -52, -73)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1236, -20, 1256, 754, -64, 708, -62, -84)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="test_scene" type="Node2D"]
 
@@ -76,3 +88,26 @@ shape = SubResource("RectangleShape2D_1480h")
 
 [node name="Sprite2D" type="Sprite2D" parent="NPC"]
 texture = ExtResource("2_c0wca")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC"]
+
+[node name="NPCPath1" type="Path2D" parent="."]
+curve = SubResource("Curve2D_51fmw")
+
+[node name="NPC_Patrol" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Path")]
+position = Vector2(309, 185)
+script = ExtResource("5_lhpo4")
+Path = NodePath("../NPCPath1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Patrol"]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC_Patrol"]
+self_modulate = Color(0.654902, 0.184314, 0.92549, 1)
+texture = ExtResource("2_c0wca")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC_Patrol"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(24, -17)
+navigation_polygon = SubResource("NavigationPolygon_3h1ff")
