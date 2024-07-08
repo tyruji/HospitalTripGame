@@ -1,15 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=9 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerTopdown.cs" id="1_wsbew"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
 [ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_y77pm"]
 [ext_resource type="Script" path="res://Scripts/PlayerPlatformer.cs" id="4_crmlo"]
+[ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
 size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
 
 [node name="test_scene" type="Node2D"]
 
@@ -60,4 +64,15 @@ shape = SubResource("RectangleShape2D_cbd2m")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(28, 11)
 scale = Vector2(9.17, 0.335)
+texture = ExtResource("2_c0wca")
+
+[node name="NPC" type="CharacterBody2D" parent="."]
+modulate = Color(1, 1, 0.423529, 1)
+position = Vector2(868, 307)
+script = ExtResource("5_lhpo4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPC"]
 texture = ExtResource("2_c0wca")
