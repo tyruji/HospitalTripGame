@@ -1,13 +1,19 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=14 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
 [ext_resource type="PackedScene" uid="uid://b7pjcdxj80brb" path="res://Prefabs/npc.tscn" id="4_hd4hl"]
+[ext_resource type="Script" path="res://Scripts/NpcCoffee.cs" id="5_cmrhb"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="6_ensxm"]
+[ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="8_nafj5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
 
 [sub_resource type="Curve2D" id="Curve2D_51fmw"]
 _data = {
@@ -15,7 +21,7 @@ _data = {
 }
 point_count = 6
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_256ai"]
 size = Vector2(128, 128)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3h1ff"]
@@ -50,15 +56,34 @@ texture = ExtResource("2_c0wca")
 [node name="NPC" parent="." instance=ExtResource("4_hd4hl")]
 position = Vector2(856, 156)
 
+[node name="NpcCoffee" type="CharacterBody2D" parent="."]
+modulate = Color(1, 1, 0.423529, 1)
+position = Vector2(856, 156)
+script = ExtResource("5_cmrhb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCoffee"]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="NpcCoffee"]
+texture = ExtResource("2_c0wca")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NpcCoffee"]
+
+[node name="Area2D" type="Area2D" parent="NpcCoffee"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCoffee/Area2D"]
+shape = SubResource("RectangleShape2D_1480h")
+
 [node name="NPCPath1" type="Path2D" parent="."]
 curve = SubResource("Curve2D_51fmw")
 
-[node name="NPC_Patrol" type="CharacterBody2D" parent="."]
+[node name="NPC_Patrol" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Path")]
 position = Vector2(309, 185)
 script = ExtResource("5_lhpo4")
+Path = NodePath("../NPCPath1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Patrol"]
-shape = SubResource("RectangleShape2D_1480h")
+shape = SubResource("RectangleShape2D_256ai")
 
 [node name="Sprite2D" type="Sprite2D" parent="NPC_Patrol"]
 self_modulate = Color(0.654902, 0.184314, 0.92549, 1)
@@ -69,3 +94,22 @@ texture = ExtResource("2_c0wca")
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(24, -17)
 navigation_polygon = SubResource("NavigationPolygon_3h1ff")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("6_ensxm")
+Target = NodePath("../PlayerTopdown")
+Dampening = 5.0
+
+[node name="CoffeeQueueManager" type="Node" parent="."]
+script = ExtResource("8_nafj5")
+
+[node name="Timer" type="Timer" parent="CoffeeQueueManager"]
+wait_time = 5.0
+
+[node name="QueuePosition0" type="Sprite2D" parent="CoffeeQueueManager"]
+self_modulate = Color(0.270222, 0.270222, 0.270222, 1)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_c0wca")
+
+[connection signal="body_entered" from="NpcCoffee/Area2D" to="NpcCoffee" method="OnBodyEntered"]
