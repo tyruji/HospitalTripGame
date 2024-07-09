@@ -5,6 +5,7 @@ using static CharacterStates;
 public partial class PlayerTopdown : PlayerBase//, IAnimatable
 {
 /*
+
     [Export]
     public AnimationPlayer AnimationPlayer { get; private set; } = null;
 
