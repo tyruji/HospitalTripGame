@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d05nwq3xu8lpk"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerPlatformer.cs" id="1_f2th4"]
+[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_n2nlj"]
+[ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_cbv1s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
+size = Vector2(128, 128)
+
+[node name="PlayerPlatformer" type="CharacterBody2D"]
+position = Vector2(923, 519)
+script = ExtResource("1_f2th4")
+Speed = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7t14x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n2nlj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="InputHandler" type="Node" parent="."]
+script = ExtResource("3_cbv1s")
