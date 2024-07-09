@@ -19,11 +19,6 @@ config/icon="res://icon.svg"
 
 project/assembly_name="HospitalTripGame"
 
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0
-
 [input]
 
 up={
@@ -61,3 +56,6 @@ jump={
 ]
 }
 
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
