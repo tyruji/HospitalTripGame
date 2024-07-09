@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7pjcdxj80brb"]
+
+[ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="1_m7swq"]
+[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_tttmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
+
+[node name="NPC" type="CharacterBody2D"]
+modulate = Color(1, 1, 0.423529, 1)
+position = Vector2(868, 307)
+script = ExtResource("1_m7swq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tttmj")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
