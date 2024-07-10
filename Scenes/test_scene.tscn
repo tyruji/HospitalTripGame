@@ -31,6 +31,7 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 [node name="test_scene" type="Node2D"]
 
 [node name="PlayerTopdown" parent="." instance=ExtResource("1_k0y7e")]
+position = Vector2(-280, 417)
 collision_layer = 2
 
 [node name="PlayerPlatformer" parent="." instance=ExtResource("2_1aoy3")]
@@ -63,7 +64,7 @@ position = Vector2(-78, 191)
 TargetQueueIndex = 1
 
 [node name="NpcCoffee3" parent="." instance=ExtResource("5_l1aec")]
-position = Vector2(-147, 411)
+position = Vector2(-538, 463)
 TargetQueueIndex = 2
 
 [node name="NpcCoffee4" parent="." instance=ExtResource("5_l1aec")]

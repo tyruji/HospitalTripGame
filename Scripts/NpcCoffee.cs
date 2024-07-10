@@ -6,6 +6,9 @@ public partial class NpcCoffee : NPCTopdown
 	[Export]
 	public float PlayerBounceValue = 50f;
 	
+	[Export]
+	public float MinSpotCampingDistance = 100f;
+	
 	public bool InQueue { get; set; }
 	
 	[Export]
@@ -34,7 +37,9 @@ public partial class NpcCoffee : NPCTopdown
 		if( !_gotCoffee )
 		{
 			FollowQueueSpot();
-			if( _targetSpot == null || ( !InQueue && _targetSpot.Taken ) )
+			if( _targetSpot == null || ( !InQueue && _targetSpot.Taken
+					&& GlobalPosition.DistanceSquaredTo( TargetPosition )
+					< MinSpotCampingDistance * MinSpotCampingDistance ) )
 			{
 				TargetPosition = GlobalPosition;
 			}
@@ -74,7 +79,7 @@ public partial class NpcCoffee : NPCTopdown
 		if( _queueManager.PlayerInQueue )
 		{
 			TargetQueueIndex = _queueManager.PlayerQueueIndex;
-			_targetSpot = GetSpot( TargetQueueIndex );
+			_targetSpot = GetSpot( TargetQueueIndex - 1 );
 			return;
 		}
 		
