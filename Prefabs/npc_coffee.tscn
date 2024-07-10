@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs72nn5bw7afl"]
+
+[ext_resource type="Script" path="res://Scripts/NpcCoffee.cs" id="1_gp5hm"]
+[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_uu70k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
+
+[node name="NpcCoffee" type="CharacterBody2D"]
+modulate = Color(1, 1, 0.423529, 1)
+position = Vector2(-9, -9)
+script = ExtResource("1_gp5hm")
+MinPointDistance = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_uu70k")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1480h")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

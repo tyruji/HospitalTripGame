@@ -12,11 +12,16 @@ public partial class CoffeeQueueManager : Node
 	  public bool PlayerInQueue => PlayerQueueIndex >= 0;
 
 	  public int PlayerQueueIndex { get; set; } = -1;
+	
+	  public Vector2 QueueLeavePosition => _queueLeavePoint.GlobalPosition;
 
 	  public event Action OnQueueAdvance;
+	
+	  private Marker2D _queueLeavePoint = null;
 
 	  public override void _Ready()
 	  {
+			_queueLeavePoint = GetNode<Marker2D>( "QueueLeavePoint" );
 			_timer = GetNode<Timer>( "Timer" );
 
 			_timer.Timeout += AdvanceQueue;

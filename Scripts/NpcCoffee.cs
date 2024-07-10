@@ -8,6 +8,7 @@ public partial class NpcCoffee : NPCTopdown
 	
 	public bool InQueue { get; set; }
 	
+	[Export]
 	public int TargetQueueIndex { get; set; } = -1;
 	
 	private Area2D _area = null;
@@ -15,6 +16,8 @@ public partial class NpcCoffee : NPCTopdown
 	private CoffeeQueueManager _queueManager = null;
 	
 	private QueueSpot _targetSpot = null;
+	
+	private bool _gotCoffee = false;
 	
 	public override void _Ready()
 	{
@@ -28,9 +31,13 @@ public partial class NpcCoffee : NPCTopdown
 	
 	public override void _Process( double delta )
 	{
-		if( InQueue || _targetSpot == null || _targetSpot.Taken  )
+		if( !_gotCoffee )
 		{
-			_allowMovement = false;
+			FollowQueueSpot();
+			if( _targetSpot == null || ( !InQueue && _targetSpot.Taken ) )
+			{
+				TargetPosition = GlobalPosition;
+			}
 		}
 		
 		base._Process( delta );
@@ -49,9 +56,18 @@ public partial class NpcCoffee : NPCTopdown
 	
 	private void UpdateTargetQueueSpot()
 	{
+		if( InQueue && TargetQueueIndex == 0 )
+		{
+				// Get a coffee and leave the queue.
+			TargetPosition = _queueManager.QueueLeavePosition;
+			_gotCoffee = true;
+			
+			return;
+		}
+		
 		if( InQueue )
 		{
-			_targetSpot = GetSpot( ++TargetQueueIndex );
+			_targetSpot = GetSpot( --TargetQueueIndex );
 			return;
 		}
 		
@@ -75,9 +91,8 @@ public partial class NpcCoffee : NPCTopdown
 	
 	private void FollowQueueSpot()
 	{
-		if( _targetSpot == null ) return;
+		if( _targetSpot == null || _gotCoffee ) return;
 		TargetPosition = _targetSpot.GlobalPosition;
-		_allowMovement = true;
 	}
 	
 	private QueueSpot GetSpot( int index ) => ( QueueSpot )_queueManager.GetNode( "QueueSpots" ).GetChild( index );

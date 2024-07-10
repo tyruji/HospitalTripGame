@@ -26,8 +26,6 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 
 	protected NavigationAgent2D _navAgent = null;
 
-	protected bool _allowMovement = true;
-
 	private int _currentPointIdx = 0;
 
 	public override void _Ready()
@@ -40,16 +38,16 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 	{
 		HandlePathFollow();
 		
-		if( _allowMovement )
-		{
-			Direction = ToLocal( _navAgent.GetNextPathPosition() ).Normalized();
-
-			Velocity = Speed * Direction;
-		}
-		else
+		if( GlobalPosition.DistanceSquaredTo( TargetPosition ) < MinPointDistance * MinPointDistance )
 		{
 			Direction = Vector2.Zero;
 		}
+		else
+		{
+			Direction = ToLocal( _navAgent.GetNextPathPosition() ).Normalized();
+		}
+
+		Velocity = Speed * Direction;
 
 		State.Handle( this );
 	}
