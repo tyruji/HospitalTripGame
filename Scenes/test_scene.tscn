@@ -1,25 +1,22 @@
 [gd_scene load_steps=11 format=3 uid="uid://c25ai24glsbl5"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerTopdown.cs" id="1_wsbew"]
+[ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
+[ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
-[ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_y77pm"]
-[ext_resource type="Script" path="res://Scripts/PlayerPlatformer.cs" id="4_crmlo"]
+[ext_resource type="PackedScene" uid="uid://b7pjcdxj80brb" path="res://Prefabs/npc.tscn" id="4_hd4hl"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
-size = Vector2(128, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
-size = Vector2(128, 128)
 
 [sub_resource type="Curve2D" id="Curve2D_51fmw"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 163, 177, 0, 0, 0, 0, 44, 414, 0, 0, 0, 0, 199, 566, 0, 0, 0, 0, 438, 539, 0, 0, 0, 0, 480, 295, 0, 0, 0, 0, 163, 177)
 }
 point_count = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3h1ff"]
 vertices = PackedVector2Array(1226, -10, 1245, 743, -53, 698, -52, -73)
@@ -29,37 +26,9 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="test_scene" type="Node2D"]
 
-[node name="PlayerTopdown" type="CharacterBody2D" parent="."]
-position = Vector2(578, 345)
-script = ExtResource("1_wsbew")
-Speed = 600.0
+[node name="PlayerTopdown" parent="." instance=ExtResource("1_k0y7e")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerTopdown"]
-shape = SubResource("RectangleShape2D_7t14x")
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerTopdown"]
-texture = ExtResource("2_c0wca")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerTopdown"]
-
-[node name="InputHandler" type="Node" parent="PlayerTopdown"]
-script = ExtResource("3_y77pm")
-
-[node name="PlayerPlatformer" type="CharacterBody2D" parent="."]
-position = Vector2(923, 519)
-script = ExtResource("4_crmlo")
-Speed = 600.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPlatformer"]
-shape = SubResource("RectangleShape2D_7t14x")
-
-[node name="Sprite2D" type="Sprite2D" parent="PlayerPlatformer"]
-texture = ExtResource("2_c0wca")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerPlatformer"]
-
-[node name="InputHandler" type="Node" parent="PlayerPlatformer"]
-script = ExtResource("3_y77pm")
+[node name="PlayerPlatformer" parent="." instance=ExtResource("2_1aoy3")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.0405034, 0.0223529, 1)
@@ -78,26 +47,15 @@ position = Vector2(28, 11)
 scale = Vector2(9.17, 0.335)
 texture = ExtResource("2_c0wca")
 
-[node name="NPC" type="CharacterBody2D" parent="."]
-modulate = Color(1, 1, 0.423529, 1)
-position = Vector2(868, 307)
-script = ExtResource("5_lhpo4")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC"]
-shape = SubResource("RectangleShape2D_1480h")
-
-[node name="Sprite2D" type="Sprite2D" parent="NPC"]
-texture = ExtResource("2_c0wca")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC"]
+[node name="NPC" parent="." instance=ExtResource("4_hd4hl")]
+position = Vector2(856, 156)
 
 [node name="NPCPath1" type="Path2D" parent="."]
 curve = SubResource("Curve2D_51fmw")
 
-[node name="NPC_Patrol" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Path")]
+[node name="NPC_Patrol" type="CharacterBody2D" parent="."]
 position = Vector2(309, 185)
 script = ExtResource("5_lhpo4")
-Path = NodePath("../NPCPath1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Patrol"]
 shape = SubResource("RectangleShape2D_1480h")
