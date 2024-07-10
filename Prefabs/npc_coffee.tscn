@@ -1,7 +1,4 @@
-
-
 [gd_scene load_steps=4 format=3 uid="uid://cs72nn5bw7afl"]
-
 
 [ext_resource type="Script" path="res://Scripts/NpcCoffee.cs" id="1_gp5hm"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_uu70k"]

@@ -98,8 +98,8 @@ navigation_polygon = SubResource("NavigationPolygon_3h1ff")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Target")]
 script = ExtResource("6_ensxm")
-Target = NodePath("../PlayerTopdown")
 Dampening = 5.0
+Target = NodePath("../PlayerTopdown")
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("8_nafj5")
