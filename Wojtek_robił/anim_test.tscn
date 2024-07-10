@@ -162,7 +162,7 @@ position = Vector2(3.8147e-06, -3.8147e-06)
 scale = Vector2(8, 8)
 sprite_frames = SubResource("SpriteFrames_yrkag")
 animation = &"run_right"
-frame_progress = 0.0926058
+frame_progress = 0.776875
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerPlatformer"]
 
