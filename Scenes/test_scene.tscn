@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=16 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="6_ensxm"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="8_nafj5"]
+[ext_resource type="Script" path="res://Scripts/QueueSpot.cs" id="9_62767"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
@@ -29,6 +30,9 @@ vertices = PackedVector2Array(1226, -10, 1245, 743, -53, 698, -52, -73)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1236, -20, 1256, 754, -64, 708, -62, -84)])
 source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2icqm"]
+radius = 46.6476
 
 [node name="test_scene" type="Node2D"]
 
@@ -106,10 +110,19 @@ script = ExtResource("8_nafj5")
 [node name="Timer" type="Timer" parent="CoffeeQueueManager"]
 wait_time = 5.0
 
-[node name="QueuePosition0" type="Sprite2D" parent="CoffeeQueueManager"]
+[node name="QueueSpots" type="Node2D" parent="CoffeeQueueManager"]
+
+[node name="QueueSpot0" type="Sprite2D" parent="CoffeeQueueManager/QueueSpots"]
 self_modulate = Color(0.270222, 0.270222, 0.270222, 1)
 rotation = 0.785398
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_c0wca")
+script = ExtResource("9_62767")
+
+[node name="Area2D" type="Area2D" parent="CoffeeQueueManager/QueueSpots/QueueSpot0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CoffeeQueueManager/QueueSpots/QueueSpot0/Area2D"]
+shape = SubResource("CircleShape2D_2icqm")
 
 [connection signal="body_entered" from="NpcCoffee/Area2D" to="NpcCoffee" method="OnBodyEntered"]
+[connection signal="body_entered" from="CoffeeQueueManager/QueueSpots/QueueSpot0/Area2D" to="CoffeeQueueManager/QueueSpots/QueueSpot0" method="OnBodyEntered"]
