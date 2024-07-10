@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=14 format=3 uid="uid://bmfkr4nyq7maj"]
+
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
