@@ -4,12 +4,14 @@ using System;
 public partial class CoffeeQueueManager : Node
 {
 	  [Export]
-	  public Node2D[] QueuePositions = new();
+	  public Node2D[] QueuePositions = new Node2D[ 0 ];
 
 	  [Export]
 	  private Timer _timer = null;
 
-	  public int PlayerQueueIndex { get; private set; }
+	  public bool PlayerInQueue => PlayerQueueIndex >= 0;
+
+	  public int PlayerQueueIndex { get; set; } = -1;
 
 	  public event Action OnQueueAdvance;
 
@@ -17,7 +19,7 @@ public partial class CoffeeQueueManager : Node
 	  {
 			_timer = GetNode<Timer>( "Timer" );
 
-			_timer.Timeout.Connect( AdvanceQueue() );
+			_timer.Timeout += AdvanceQueue;
 	  }
 
 	  public void AdvanceQueue()

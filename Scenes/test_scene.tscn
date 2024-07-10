@@ -1,5 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c25ai24glsbl5"]
-
+[gd_scene load_steps=16 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
@@ -63,7 +62,7 @@ position = Vector2(856, 156)
 
 [node name="NpcCoffee" type="CharacterBody2D" parent="."]
 modulate = Color(1, 1, 0.423529, 1)
-position = Vector2(856, 156)
+position = Vector2(637, 50)
 script = ExtResource("5_cmrhb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCoffee"]
@@ -110,6 +109,7 @@ script = ExtResource("8_nafj5")
 
 [node name="Timer" type="Timer" parent="CoffeeQueueManager"]
 wait_time = 5.0
+autostart = true
 
 [node name="QueueSpots" type="Node2D" parent="CoffeeQueueManager"]
 

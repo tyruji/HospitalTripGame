@@ -16,7 +16,7 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 	[Export]
 	public float MinPointDistance { get; set; } = 50f;
 
-	public Vector2 TargetPosition { set => _navAgent.TargetPosition = value;}
+	public Vector2 TargetPosition { get => _navAgent.TargetPosition; set => _navAgent.TargetPosition = value;}
 
 	public Vector2 Direction { get; set; }
 
@@ -24,7 +24,9 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 
 	public State State { get; set; } = IDLE_STATE;
 
-	private NavigationAgent2D _navAgent = null;
+	protected NavigationAgent2D _navAgent = null;
+
+	protected bool _allowMovement = true;
 
 	private int _currentPointIdx = 0;
 
@@ -37,10 +39,17 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 	public override void _Process( double delta )
 	{
 		HandlePathFollow();
+		
+		if( _allowMovement )
+		{
+			Direction = ToLocal( _navAgent.GetNextPathPosition() ).Normalized();
 
-		Direction = ToLocal( _navAgent.GetNextPathPosition() ).Normalized();
-
-		Velocity = Speed * Direction;
+			Velocity = Speed * Direction;
+		}
+		else
+		{
+			Direction = Vector2.Zero;
+		}
 
 		State.Handle( this );
 	}
