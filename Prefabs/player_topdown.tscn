@@ -7,6 +7,67 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
 size = Vector2(128, 128)
 
+[sub_resource type="Animation" id="Animation_gd1mq"]
+resource_name = "IDLE_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_msay2"]
+resource_name = "IDLE_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_4cqio"]
+resource_name = "IDLE_right"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
+[sub_resource type="Animation" id="Animation_4s1vc"]
+resource_name = "IDLE_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_tmo1i"]
 length = 0.001
 tracks/0/type = "value"
@@ -90,67 +151,6 @@ tracks/0/keys = {
 "values": [0, 1, 0, 2]
 }
 
-[sub_resource type="Animation" id="Animation_4s1vc"]
-resource_name = "IDLE_up"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_gd1mq"]
-resource_name = "IDLE_down"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [4]
-}
-
-[sub_resource type="Animation" id="Animation_msay2"]
-resource_name = "IDLE_left"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [8]
-}
-
-[sub_resource type="Animation" id="Animation_4cqio"]
-resource_name = "IDLE_right"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [12]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1svcv"]
 _data = {
 "IDLE_down": SubResource("Animation_gd1mq"),
@@ -232,9 +232,11 @@ states/walk/position = Vector2(619, 115)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_cg6ua"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xs0w8"), "walk", "End", SubResource("AnimationNodeStateMachineTransition_drhio"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_hu35n")]
 graph_offset = Vector2(-5, 2)
 
-[node name="PlayerTopdown" type="CharacterBody2D"]
+[node name="PlayerTopdown" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "Sprite")]
 position = Vector2(578, 345)
 script = ExtResource("1_yiyig")
+AnimationPlayer = NodePath("AnimationPlayer")
+Sprite = NodePath("Sprite2D")
 Speed = 600.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
