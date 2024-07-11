@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1fmoctb40ipg"]
+
+[ext_resource type="Script" path="res://Scripts/Camera.cs" id="1_i0c8x"]
+
+[node name="Camera2D" type="Camera2D"]
+script = ExtResource("1_i0c8x")
+Dampening = 5.0
