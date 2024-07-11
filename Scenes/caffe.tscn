@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cis30my5qeeci"]
+[gd_scene load_steps=9 format=3 uid="uid://cis30my5qeeci"]
 
 [ext_resource type="Texture2D" uid="uid://d0hdefnqpivrj" path="res://Graphics/Tileset.png" id="1_3s26i"]
+[ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="2_jkn0t"]
+[ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
+[ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_fqamx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r63dp"]
 texture = ExtResource("1_3s26i")
@@ -2578,13 +2581,44 @@ texture = ExtResource("1_3s26i")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_r63dp")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_l3gp8"]
+vertices = PackedVector2Array(1004, 756, -96, 756, -96, 216, 1004, 216)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1067, 803, 1063, 39, -140, 28, -132, 811)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
+
 [node name="Caffe" type="Node2D"]
+
+[node name="CoffeeQueueManager" type="Node" parent="."]
+script = ExtResource("1_w4n55")
+
+[node name="QueueLeavePoint" type="Marker2D" parent="CoffeeQueueManager"]
+position = Vector2(999, 175)
+
+[node name="Timer" type="Timer" parent="CoffeeQueueManager"]
+wait_time = 5.0
+autostart = true
+
+[node name="QueueSpots" type="Node2D" parent="CoffeeQueueManager"]
+
+[node name="QueueSpot0" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
+position = Vector2(363, 406)
+
+[node name="QueueSpot1" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
+position = Vector2(363, 544)
+
+[node name="QueueSpot2" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
+position = Vector2(489, 592)
+
+[node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
+position = Vector2(621, 594)
 
 [node name="PlayerTopdown" parent="." instance=ExtResource("2_jkn0t")]
 position = Vector2(565, 372)
 scale = Vector2(0.5, 0.5)
 
-[node name="TileMap2" type="TileMap" parent="."]
+[node name="TileMap2" type="TileMap" parent="." groups=["navigation"]]
 scale = Vector2(5, 5)
 tile_set = SubResource("TileSet_nypks")
 format = 2
@@ -2594,3 +2628,12 @@ layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array(65548, 2097152, 12, 12, 2097152, 11, 6, 3670016, 13, 4, 3538944, 13, 5, 3604480, 13, 7, 3735552, 13, 65540, 2490368, 13, 131076, 2490368, 14, 65541, 2490368, 13, 131077, 2490368, 14, 65542, 2490368, 13, 131078, 2490368, 14, 65543, 2490368, 13, 131079, 2490368, 14, 65544, 2490368, 13, 131080, 2490368, 14, 65539, 2490368, 13, 131075, 2752512, 12, 196610, 2883584, 9, 196617, 3145728, 9, 262153, 3145728, 10, 262152, 3080192, 10, 262151, 3276800, 12, 262150, 3080192, 10, 262149, 3211264, 12, 262148, 3014656, 10, 262147, 3080192, 10, 262146, 2883584, 10, 131081, 3145728, 8, 131074, 2883584, 8)
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array(131076, 2686976, 14, 131077, 2752512, 14, 131078, 2818048, 14, 131079, 2883584, 14, 131080, 2949120, 14, 131075, 2555904, 14, 393217, 3604480, 23, 393218, 3670016, 23, 393219, 3735552, 23, 458763, 3735552, 24, 393228, 3801088, 23, 458764, 3801088, 24, 393229, 3866624, 23, 458765, 3866624, 24, 65549, 4325376, 9, 131085, 4325376, 10, 327693, 4128768, 9, 458752, 4194304, 9, 10, 3670016, 15, 1, 3670016, 16)
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="NpcCoffee" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(772, 504)
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(106, -46)
+navigation_polygon = SubResource("NavigationPolygon_l3gp8")

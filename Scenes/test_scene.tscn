@@ -1,15 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=15 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
 [ext_resource type="PackedScene" uid="uid://b7pjcdxj80brb" path="res://Prefabs/npc.tscn" id="4_hd4hl"]
 [ext_resource type="PackedScene" uid="uid://b7a25kekn6wox" path="res://Prefabs/npc_guard.tscn" id="5_gpjj7"]
-[ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/npc_coffee.tscn" id="5_l1aec"]
+[ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_l1aec"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="7_sy1hh"]
-[ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="8_nafj5"]
-[ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="9_m6xho"]
+[ext_resource type="PackedScene" uid="uid://cn1c78o0e3ihr" path="res://Prefabs/Cafe/coffee_queue_manager.tscn" id="9_vxkgs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
@@ -105,25 +104,4 @@ navigation_polygon = SubResource("NavigationPolygon_3h1ff")
 
 [node name="Camera2D" parent="." instance=ExtResource("7_sy1hh")]
 
-[node name="CoffeeQueueManager" type="Node" parent="."]
-script = ExtResource("8_nafj5")
-
-[node name="QueueLeavePoint" type="Marker2D" parent="CoffeeQueueManager"]
-position = Vector2(1178, -273)
-
-[node name="Timer" type="Timer" parent="CoffeeQueueManager"]
-wait_time = 5.0
-autostart = true
-
-[node name="QueueSpots" type="Node2D" parent="CoffeeQueueManager"]
-
-[node name="QueueSpot0" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("9_m6xho")]
-
-[node name="QueueSpot1" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("9_m6xho")]
-position = Vector2(-81, 189)
-
-[node name="QueueSpot2" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("9_m6xho")]
-position = Vector2(-147, 412)
-
-[node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("9_m6xho")]
-position = Vector2(-177, 651)
+[node name="CoffeeQueueManager" parent="." instance=ExtResource("9_vxkgs")]

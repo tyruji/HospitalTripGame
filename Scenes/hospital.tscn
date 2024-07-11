@@ -13,10 +13,11 @@ _data = {
 point_count = 2
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xlaik"]
-vertices = PackedVector2Array(5104, 1292, 32, 1315, -1056, -1928, 5391, -2103)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(26, 1326, 5114, 1302, 5402, -2114, -1070, -1938)])
-source_geometry_group_name = &"navigation_polygon_source_group"
+vertices = PackedVector2Array(4103, -65, 4014, -65, 4014, -385, 4263, -2006, 2974, -385, 2974, -1425, 20, -1695, 1674, -1425, 27, -385, 1674, -385, 2874, -1245, 2874, -385, 2474, -385, 1774, -1245, 2474, 195, 3434, 195, 3434, 415, 554, 415, 814, 915, 814, 835, 1274, 835, 1274, 1135, 814, 1135, 814, 975, 554, 915, 174, 975, 174, 195, 2174, 195, 2174, -385, 1774, -385, 2894, 995, 4015, 995, 3984, 1364, 2894, 1155, 2414, 1345, 2414, 1315, 2574, 1315, 2574, 1155)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 3), PackedInt32Array(6, 3, 5, 7), PackedInt32Array(8, 6, 7, 9), PackedInt32Array(10, 11, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(18, 19, 20, 21), PackedInt32Array(21, 22, 23), PackedInt32Array(18, 21, 23), PackedInt32Array(24, 18, 23, 25), PackedInt32Array(24, 25, 26, 17), PackedInt32Array(17, 26, 27), PackedInt32Array(14, 17, 27), PackedInt32Array(12, 14, 27, 28), PackedInt32Array(13, 12, 28), PackedInt32Array(13, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(34, 35, 36, 32), PackedInt32Array(33, 32, 36, 37)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(26, 1326, 3994, 1375, 4274, -2017, 10, -1705)])
+source_geometry_mode = 1
+source_geometry_group_name = &"navigation"
 
 [node name="Hospital" type="Node2D"]
 
@@ -32,7 +33,7 @@ position = Vector2(302, 729)
 Speed = 50.0
 Path = NodePath("../../GuardPaths/Path1")
 
-[node name="TileMap2" type="TileMap" parent="."]
+[node name="TileMap2" type="TileMap" parent="." groups=["navigation"]]
 position = Vector2(84, 25)
 scale = Vector2(5, 5)
 tile_set = ExtResource("1_a8hq1")
@@ -56,5 +57,4 @@ stream = ExtResource("4_pffky")
 autoplay = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-visible = false
 navigation_polygon = SubResource("NavigationPolygon_xlaik")

@@ -25,7 +25,7 @@ public partial class NpcCoffee : NPCTopdown
 	public override void _Ready()
 	{
 		base._Ready();
-		_queueManager = GetNode<CoffeeQueueManager>( "../CoffeeQueueManager" );
+		_queueManager = GetNode<CoffeeQueueManager>( "../../CoffeeQueueManager" );
 		_area = GetNode<Area2D>( "Area2D" );
 		
 		_queueManager.OnQueueAdvance += UpdateTargetQueueSpot;
@@ -61,7 +61,7 @@ public partial class NpcCoffee : NPCTopdown
 	
 	private void UpdateTargetQueueSpot()
 	{
-		if( InQueue && TargetQueueIndex == 0 )
+		if( InQueue && TargetQueueIndex <= 0 )
 		{
 				// Get a coffee and leave the queue.
 			TargetPosition = _queueManager.QueueLeavePosition;

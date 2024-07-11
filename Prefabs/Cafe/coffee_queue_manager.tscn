@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://cn1c78o0e3ihr"]
+
+[ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_1d0jv"]
+[ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_c4n2x"]
+
+[node name="CoffeeQueueManager" type="Node"]
+script = ExtResource("1_1d0jv")
+
+[node name="QueueLeavePoint" type="Marker2D" parent="."]
+position = Vector2(1178, -273)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="QueueSpots" type="Node2D" parent="."]
+
+[node name="QueueSpot0" parent="QueueSpots" instance=ExtResource("2_c4n2x")]
+
+[node name="QueueSpot1" parent="QueueSpots" instance=ExtResource("2_c4n2x")]
+position = Vector2(-81, 189)
+
+[node name="QueueSpot2" parent="QueueSpots" instance=ExtResource("2_c4n2x")]
+position = Vector2(-147, 412)
+
+[node name="QueueSpot3" parent="QueueSpots" instance=ExtResource("2_c4n2x")]
+position = Vector2(-177, 651)
