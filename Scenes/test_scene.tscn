@@ -1,18 +1,28 @@
-[gd_scene load_steps=16 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=18 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="1_k0y7e"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
 [ext_resource type="PackedScene" uid="uid://b7pjcdxj80brb" path="res://Prefabs/npc.tscn" id="4_hd4hl"]
+[ext_resource type="Script" path="res://Scripts/NPCGuard.cs" id="5_i2jeu"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/npc_coffee.tscn" id="5_l1aec"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
 [ext_resource type="Script" path="res://Scripts/Camera.cs" id="6_ensxm"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="8_nafj5"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="9_m6xho"]
-[ext_resource type="Script" path="res://Scripts/NextLevelDoor.cs" id="10_85b5c"]
+[ext_resource type="PackedScene" uid="uid://inosr4imj748" path="res://Prefabs/next_level_door.tscn" id="10_mnshn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
+
+[sub_resource type="Curve2D" id="Curve2D_8p6to"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1260, 8, 0, 0, 0, 0, 1136, -170, 0, 0, 0, 0, 839, -118, 0, 0, 0, 0, 690, 399, 0, 0, 0, 0, 1258, 610, 0, 0, 0, 0, 876, 1105, 0, 0, 0, 0, 1324, 1286, 0, 0, 0, 0, 1299, 151, 0, 0, 0, 0, 1351, 665, 0, 0, 0, 0, 1329, 845, 0, 0, 0, 0, 1299, 151, 0, 0, 0, 0, 1260, 8)
+}
+point_count = 12
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
 
 [sub_resource type="Curve2D" id="Curve2D_51fmw"]
 _data = {
@@ -29,9 +39,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1270, -337, 1507, 1452, -710, 1167, -998, -394)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0qwq"]
-size = Vector2(128, 128)
-
 [node name="test_scene" type="Node2D"]
 
 [node name="PlayerTopdown" parent="." instance=ExtResource("1_k0y7e")]
@@ -39,11 +46,6 @@ position = Vector2(-280, 417)
 collision_layer = 2
 
 [node name="PlayerPlatformer" parent="." instance=ExtResource("2_1aoy3")]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.0405034, 0.0223529, 1)
-position = Vector2(287, 415)
-texture = ExtResource("2_c0wca")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(551, 621)
@@ -58,7 +60,38 @@ scale = Vector2(9.17, 0.335)
 texture = ExtResource("2_c0wca")
 
 [node name="NPC" parent="." instance=ExtResource("4_hd4hl")]
-position = Vector2(856, 156)
+position = Vector2(485, 9)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8p6to")
+
+[node name="NPCGuard" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_Sight", "Path")]
+modulate = Color(1, 0, 0.423529, 1)
+position = Vector2(1145, 314)
+script = ExtResource("5_i2jeu")
+_Sight = NodePath("Sight")
+Path = NodePath("../Path2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NPCGuard"]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="NPCGuard"]
+texture = ExtResource("2_c0wca")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPCGuard"]
+
+[node name="Sight" type="Node2D" parent="NPCGuard"]
+rotation = 4.71239
+
+[node name="NextLevelDoor" parent="NPCGuard/Sight" instance=ExtResource("10_mnshn")]
+visible = false
+position = Vector2(4303, -55.8099)
+scale = Vector2(5.75, 0.41)
+
+[node name="Sprite" type="Sprite2D" parent="NPCGuard/Sight"]
+position = Vector2(-366, 2)
+scale = Vector2(5.75, 0.41)
+texture = ExtResource("2_c0wca")
 
 [node name="NpcCoffee" parent="." instance=ExtResource("5_l1aec")]
 TargetQueueIndex = 0
@@ -127,30 +160,3 @@ position = Vector2(-147, 412)
 
 [node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("9_m6xho")]
 position = Vector2(-177, 651)
-
-[node name="NextLevelDoor" type="Node2D" parent="."]
-position = Vector2(812, -141)
-script = ExtResource("10_85b5c")
-
-[node name="ScreenDarken" type="ColorRect" parent="NextLevelDoor"]
-z_index = 530
-custom_minimum_size = Vector2(42069, 42069)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="NextLevelDoor"]
-texture = ExtResource("2_c0wca")
-
-[node name="Area2D" type="Area2D" parent="NextLevelDoor"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NextLevelDoor/Area2D"]
-shape = SubResource("RectangleShape2D_i0qwq")
-
-[connection signal="body_entered" from="NextLevelDoor/Area2D" to="NextLevelDoor" method="OnBodyEntered"]
