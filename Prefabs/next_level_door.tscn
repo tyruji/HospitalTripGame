@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://inosr4imj748"]
+[gd_scene load_steps=3 format=3 uid="uid://inosr4imj748"]
 
 [ext_resource type="Script" path="res://Scripts/NextLevelDoor.cs" id="1_f2268"]
-[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_eqxtk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0qwq"]
 size = Vector2(128, 128)
@@ -22,9 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_eqxtk")
 
 [node name="Area2D" type="Area2D" parent="."]
 

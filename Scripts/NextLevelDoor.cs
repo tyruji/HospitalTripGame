@@ -13,6 +13,7 @@ public partial class NextLevelDoor : Node2D
 	
 	private void SceneStart()
 	{
+		this.Visible = true;
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty( GetNode( "ScreenDarken" ), "modulate", new Color( 0,0,0,0 ), 1.0f ).SetTrans( Tween.TransitionType.Sine );
 	}
@@ -24,7 +25,12 @@ public partial class NextLevelDoor : Node2D
 		tween.TweenCallback( Callable.From( LoadScene ) );
 	}
 	
-	private void LoadScene() => GetTree().ChangeSceneToPacked( _NextScene );
+	private void LoadScene()
+	{
+		if( _NextScene == null ) return;
+		
+		GetTree().ChangeSceneToPacked( _NextScene );
+	} 
 	
 	private void OnBodyEntered( Node2D body )
 	{
