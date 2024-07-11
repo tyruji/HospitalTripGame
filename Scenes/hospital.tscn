@@ -49,12 +49,14 @@ layer_2/tile_data = PackedInt32Array(786441, 1900544, 14, 589834, 1310720, 12, 5
 position = Vector2(1198, 1077)
 scale = Vector2(0.5, 0.5)
 
-[node name="Camera2D" parent="PlayerTopdown" instance=ExtResource("3_oihb2")]
-position = Vector2(4, 0)
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_pffky")
 autoplay = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_xlaik")
+
+[node name="Camera2D" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("3_oihb2")]
+position = Vector2(1200, 1077)
+scale = Vector2(0.5, 0.5)
+Target = NodePath("../PlayerTopdown")
