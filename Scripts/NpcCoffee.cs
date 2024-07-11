@@ -41,6 +41,7 @@ public partial class NpcCoffee : NPCTopdown
 					&& GlobalPosition.DistanceSquaredTo( TargetPosition )
 					< MinSpotCampingDistance * MinSpotCampingDistance ) )
 			{
+				UpdateTargetQueueSpot();
 				TargetPosition = GlobalPosition;
 			}
 		}

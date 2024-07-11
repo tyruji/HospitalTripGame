@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cs72nn5bw7afl"]
+[gd_scene load_steps=5 format=3 uid="uid://cs72nn5bw7afl"]
 
 [ext_resource type="Script" path="res://Scripts/NpcCoffee.cs" id="1_gp5hm"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_uu70k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pc2fo"]
+radius = 33.01
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
 size = Vector2(63, 64)
@@ -13,13 +16,15 @@ MinPointDistance = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -1)
-shape = SubResource("RectangleShape2D_1480h")
+shape = SubResource("CircleShape2D_pc2fo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_uu70k")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 74.7
 
 [node name="Area2D" type="Area2D" parent="."]
 
