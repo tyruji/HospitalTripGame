@@ -2592,9 +2592,9 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_r63dp")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_l3gp8"]
-vertices = PackedVector2Array(1004, 756, -96, 756, -96, 216, 1004, 216)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1067, 803, 1063, 39, -140, 28, -132, 811)])
+vertices = PackedVector2Array(1112, 2491, -210, 2543, -195, 2056, 1102, 2056, 604, 356, 144, 356, 144, 296, 604, 296, 1004, 1956, -96, 1956, 304, 1816, 864, 1656, 124, 1816, 1004, 696, 1004, 1236, 924, 1236, 704, 1096, 704, 996, 764, 696, 1004, 1336, 864, 1556, 924, 1336, 224, 1256, 224, 1156, 524, 1096, 604, 1556, 604, 1656, 304, 1716, 64, 1576, 64, 1396, 124, 1716, -36, 1256, -36, 1396, 704, 456, 704, 216, 924, 216, 924, 296, 1004, 296, 1004, 436, 924, 436, 924, 536, 764, 596, 224, 616, 224, 516, 1004, 536, 1004, 596, -96, 696, -16, 696, -36, 1156, -16, 616, 524, 996, -36, 516, -36, 596, -96, 596, -96, 216, 44, 216, 44, 456, -36, 1576)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 10, 9), PackedInt32Array(13, 14, 15, 16, 17, 18), PackedInt32Array(19, 8, 11, 20, 21), PackedInt32Array(22, 23, 24, 16, 15, 21, 20, 25), PackedInt32Array(26, 11, 10, 27), PackedInt32Array(28, 29, 22, 25, 26, 27, 30), PackedInt32Array(31, 22, 29, 32), PackedInt32Array(33, 34, 35, 36), PackedInt32Array(36, 37, 38, 39), PackedInt32Array(33, 36, 39), PackedInt32Array(33, 39, 40, 41, 42, 43), PackedInt32Array(40, 44, 45, 41), PackedInt32Array(9, 46, 47, 48), PackedInt32Array(23, 47, 49, 42, 50, 24), PackedInt32Array(51, 52, 53, 54), PackedInt32Array(51, 54, 55, 56), PackedInt32Array(43, 51, 56, 33), PackedInt32Array(42, 41, 18, 17, 50), PackedInt32Array(47, 23, 48), PackedInt32Array(9, 48, 31), PackedInt32Array(9, 31, 32), PackedInt32Array(9, 32, 57), PackedInt32Array(30, 12, 9, 57, 28)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1123, 2501, 1063, 39, -140, 28, -221, 2554)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 
@@ -2604,7 +2604,7 @@ source_geometry_group_name = &"navigation"
 script = ExtResource("1_w4n55")
 
 [node name="QueueLeavePoint" type="Marker2D" parent="CoffeeQueueManager"]
-position = Vector2(999, 175)
+position = Vector2(991, 202)
 
 [node name="Timer" type="Timer" parent="CoffeeQueueManager"]
 wait_time = 5.0
@@ -2616,13 +2616,13 @@ autostart = true
 position = Vector2(363, 406)
 
 [node name="QueueSpot1" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(363, 544)
+position = Vector2(379, 628)
 
 [node name="QueueSpot2" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(489, 592)
+position = Vector2(398, 803)
 
 [node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(621, 594)
+position = Vector2(396, 958)
 
 [node name="PlayerTopdown" parent="." instance=ExtResource("2_jkn0t")]
 position = Vector2(565, 372)
@@ -2642,7 +2642,43 @@ layer_2/tile_data = PackedInt32Array(131076, 2686976, 14, 131077, 2752512, 14, 1
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="NpcCoffee" parent="NPCs" instance=ExtResource("5_fqamx")]
-position = Vector2(772, 504)
+position = Vector2(451, 497)
+
+[node name="NpcCoffee11" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(246, 633)
+
+[node name="NpcCoffee13" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(258, 742)
+
+[node name="NpcCoffee12" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(584, 523)
+
+[node name="NpcCoffee2" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(559, 660)
+
+[node name="NpcCoffee3" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(837, 655)
+
+[node name="NpcCoffee4" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(968, 750)
+
+[node name="NpcCoffee5" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(963, 905)
+
+[node name="NpcCoffee6" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(910, 1041)
+
+[node name="NpcCoffee7" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(656, 1113)
+
+[node name="NpcCoffee8" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(536, 1158)
+
+[node name="NpcCoffee9" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(392, 1206)
+
+[node name="NpcCoffee10" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(472, 1276)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(106, -46)

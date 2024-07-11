@@ -43,6 +43,7 @@ public partial class NpcCoffee : NPCTopdown
 			{
 				TargetPosition = GlobalPosition;
 			}
+			if( _targetSpot != null && !InQueue && _targetSpot.Taken ) UpdateTargetQueueSpot();
 		}
 		
 		base._Process( delta );
