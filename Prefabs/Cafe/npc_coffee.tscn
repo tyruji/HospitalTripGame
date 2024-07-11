@@ -6,12 +6,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc2fo"]
 radius = 33.01
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
-size = Vector2(63, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_1psf3"]
+radius = 45.62
 
 [node name="NpcCoffee" type="CharacterBody2D"]
 modulate = Color(1, 1, 0.423529, 1)
 script = ExtResource("1_gp5hm")
+PlayerBounceValue = 1500.0
 MinPointDistance = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -29,6 +30,6 @@ radius = 74.7
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_1480h")
+shape = SubResource("CircleShape2D_1psf3")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

@@ -7,6 +7,9 @@ public partial class NpcCoffee : NPCTopdown
 	public float PlayerBounceValue = 50f;
 	
 	[Export]
+	public float PlayerBounceTime = 1f;
+	
+	[Export]
 	public float MinSpotCampingDistance = 100f;
 	
 	public bool InQueue { get; set; }
@@ -56,8 +59,8 @@ public partial class NpcCoffee : NPCTopdown
 		var dir = ( player.GlobalPosition - GlobalPosition ).Normalized();
 		
 		GD.Print( "BOUNCE PLAYER" );
-			// Ta funkcje musisz jeszcze napisac w kodzie gracza
-		//player.AddForce( PlayerBounceValue * dir );
+		
+		player.AddForceImpulse( PlayerBounceValue * dir, PlayerBounceTime );
 	}
 	
 	private void UpdateTargetQueueSpot()
