@@ -41,9 +41,9 @@ public partial class NpcCoffee : NPCTopdown
 					&& GlobalPosition.DistanceSquaredTo( TargetPosition )
 					< MinSpotCampingDistance * MinSpotCampingDistance ) )
 			{
-				UpdateTargetQueueSpot();
 				TargetPosition = GlobalPosition;
 			}
+			if( _targetSpot != null && !InQueue && _targetSpot.Taken ) UpdateTargetQueueSpot();
 		}
 		
 		base._Process( delta );

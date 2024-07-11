@@ -2642,16 +2642,43 @@ layer_2/tile_data = PackedInt32Array(131076, 2686976, 14, 131077, 2752512, 14, 1
 [node name="NPCs" type="Node2D" parent="."]
 
 [node name="NpcCoffee" parent="NPCs" instance=ExtResource("5_fqamx")]
-position = Vector2(772, 504)
+position = Vector2(451, 497)
+
+[node name="NpcCoffee11" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(246, 633)
+
+[node name="NpcCoffee13" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(258, 742)
+
+[node name="NpcCoffee12" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(584, 523)
 
 [node name="NpcCoffee2" parent="NPCs" instance=ExtResource("5_fqamx")]
-position = Vector2(704, 660)
+position = Vector2(559, 660)
 
 [node name="NpcCoffee3" parent="NPCs" instance=ExtResource("5_fqamx")]
-position = Vector2(792, 769)
+position = Vector2(837, 655)
 
 [node name="NpcCoffee4" parent="NPCs" instance=ExtResource("5_fqamx")]
-position = Vector2(923, 864)
+position = Vector2(968, 750)
+
+[node name="NpcCoffee5" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(963, 905)
+
+[node name="NpcCoffee6" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(910, 1041)
+
+[node name="NpcCoffee7" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(656, 1113)
+
+[node name="NpcCoffee8" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(536, 1158)
+
+[node name="NpcCoffee9" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(392, 1206)
+
+[node name="NpcCoffee10" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(472, 1276)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(106, -46)
