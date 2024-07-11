@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7pjcdxj80brb" path="res://Prefabs/npc.tscn" id="4_hd4hl"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/npc_coffee.tscn" id="5_l1aec"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
-[ext_resource type="Script" path="res://Scripts/Camera.cs" id="6_ensxm"]
+[ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="7_sy1hh"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="8_nafj5"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="9_m6xho"]
 
@@ -96,10 +96,7 @@ texture = ExtResource("2_c0wca")
 position = Vector2(24, -17)
 navigation_polygon = SubResource("NavigationPolygon_3h1ff")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("Target")]
-script = ExtResource("6_ensxm")
-Target = NodePath("../PlayerTopdown")
-Dampening = 5.0
+[node name="Camera2D" parent="." instance=ExtResource("7_sy1hh")]
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("8_nafj5")
