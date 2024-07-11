@@ -1,10 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6u4138taa21f"]
+[gd_scene load_steps=8 format=3 uid="uid://c6u4138taa21f"]
 
+[ext_resource type="PackedScene" uid="uid://b7a25kekn6wox" path="res://Prefabs/npc_guard.tscn" id="1_27q1u"]
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="1_a8hq1"]
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="2_2sd3e"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="3_oihb2"]
+[ext_resource type="AudioStream" uid="uid://cnt5wqiw6c8u4" path="res://Music/hospital_escape.mp3" id="4_pffky"]
+
+[sub_resource type="Curve2D" id="Curve2D_ln1nh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 308, 918, 0, 0, 0, 0, 314, 738)
+}
+point_count = 2
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xlaik"]
+vertices = PackedVector2Array(5104, 1292, 32, 1315, -1056, -1928, 5391, -2103)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(26, 1326, 5114, 1302, 5402, -2114, -1070, -1938)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="Hospital" type="Node2D"]
+
+[node name="GuardPaths" type="Node2D" parent="."]
+
+[node name="Path1" type="Path2D" parent="GuardPaths"]
+curve = SubResource("Curve2D_ln1nh")
+
+[node name="Guards" type="Node2D" parent="."]
+
+[node name="NPCGuard1" parent="Guards" node_paths=PackedStringArray("Path") instance=ExtResource("1_27q1u")]
+position = Vector2(302, 729)
+Speed = 50.0
+Path = NodePath("../../GuardPaths/Path1")
 
 [node name="TileMap2" type="TileMap" parent="."]
 position = Vector2(84, 25)
@@ -24,3 +50,11 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Camera2D" parent="PlayerTopdown" instance=ExtResource("3_oihb2")]
 position = Vector2(4, 0)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pffky")
+autoplay = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_xlaik")
