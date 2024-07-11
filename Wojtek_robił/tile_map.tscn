@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://hkw6q8xcyi7n"]
+[gd_scene load_steps=4 format=3 uid="uid://cq710mg54c4w7"]
 
-[ext_resource type="Texture2D" uid="uid://d0hdefnqpivrj" path="res://Graphics/Tileset.png" id="1_7p1l4"]
+[ext_resource type="Texture2D" uid="uid://wej2032cgh12" path="res://Scenes/Tileset.png" id="1_fmhit"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4w25"]
-texture = ExtResource("1_7p1l4")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ityia"]
+texture = ExtResource("1_fmhit")
 16:0/0 = 0
 17:0/0 = 0
 18:0/0 = 0
@@ -790,11 +790,12 @@ texture = ExtResource("1_7p1l4")
 51:26/0 = 0
 52:26/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_i68ma"]
-sources/0 = SubResource("TileSetAtlasSource_p4w25")
+[sub_resource type="TileSet" id="TileSet_2xnib"]
+sources/0 = SubResource("TileSetAtlasSource_ityia")
 
 [node name="TileMap" type="TileMap"]
-tile_set = SubResource("TileSet_i68ma")
+position = Vector2(165, 71)
+tile_set = SubResource("TileSet_2xnib")
 format = 2
 layer_0/name = "1"
 layer_0/z_index = -2
