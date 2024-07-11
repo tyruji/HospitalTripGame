@@ -10,6 +10,32 @@ public partial class PlayerTopdown : PlayerBase, IAnimatable
 	[Export]
 	public Sprite2D Sprite { get; private set; } = null;
 
+	private Vector2 _force = Vector2.Zero;
+
+	private float _bounceTime = 1;
+
+	private float _timer = 0;
+
+	public void AddForceImpulse( Vector2 force, float bounce_time )
+	{
+		_force += force;
+		_bounceTime = bounce_time;
+		_timer = 0;
+	}
+	
+	public override void _Process( double delta )
+	{
+		base._Process( delta );
+		
+		_timer += ( float ) delta;
+		_force = _force.Lerp( Vector2.Zero, _timer / _bounceTime );
+		if( _timer > _bounceTime )
+		{
+			_force = Vector2.Zero;
+			return;
+		}
+		Velocity += _force;
+	}
 }
 
 

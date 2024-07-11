@@ -152,6 +152,8 @@ public class IdleState : CharacterState
 			GD.PrintErr( "No IMoveable interface on object" );
 			return;
 		}
+		
+		moveable.Velocity = Vector2.Zero;
 
 		if( stateHolder is IAttacker attacker )
 		{
