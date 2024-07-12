@@ -30,4 +30,9 @@ public abstract partial class PlayerBase : CharacterBody2D, IStateHolder, IMovea
 	{
 		MoveAndSlide();
 	}
+	
+	public virtual void Shoot()
+	{
+		
+	}
 }

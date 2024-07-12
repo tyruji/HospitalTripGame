@@ -57,14 +57,7 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 
 		State.Handle( this );
 		
-		_timer += ( float ) delta;
-		_force = _force.Lerp( Vector2.Zero, _timer / _bounceTime );
-		if( _timer > _bounceTime )
-		{
-			_force = Vector2.Zero;
-			return;
-		}
-		Velocity += _force;
+		HandleForces( delta );
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -77,6 +70,18 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 		_force += force;
 		_bounceTime = bounce_time;
 		_timer = 0;
+	}
+	
+	private void HandleForces( double delta )
+	{
+		_timer += ( float ) delta;
+		_force = _force.Lerp( Vector2.Zero, _timer / _bounceTime );
+		if( _timer > _bounceTime )
+		{
+			_force = Vector2.Zero;
+			return;
+		}
+		Velocity += _force;
 	}
 
 	private void HandlePathFollow()

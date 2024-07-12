@@ -303,6 +303,9 @@ public class ShootingState : CharacterState
 		// HERE MAKE THIS THE DIRECTION FROM THE PLAYER TO THE MOUSE POSITION
 		var dir = attacker.AttackDirection;
 
+		// SPAWN PROJECTILE
+		attacker.Shoot();
+
 		animatable.Sprite.FlipH = dir.X < 0;
 
 		string anim_name = AnimationNames.side;
@@ -332,6 +335,8 @@ public class ShootingState : CharacterState
 
 	public override void Handle( IStateHolder stateHolder )
 	{
+		if( stateHolder is not IAttacker attacker ) return;
+		
 		if( stateHolder is not IAnimatable animatable )
 		{
 			Next( stateHolder, IDLE_GUN_STATE );
@@ -344,13 +349,17 @@ public class ShootingState : CharacterState
 
 		if( animatable.AnimationPlayer.IsPlaying() ) return;
 
+		State new_state;
+
 		if( stateHolder is IMoveable moveable && moveable.Direction.LengthSquared() > 0 )
 		{
-			Next( stateHolder, MOVING_GUN_STATE );
+			new_state = attacker.HoldingGun ? MOVING_GUN_STATE : MOVING_STATE;
+			Next( stateHolder, new_state );
 			return;
 		}
+		new_state = attacker.HoldingGun ? IDLE_GUN_STATE : IDLE_STATE;
 
-		Next( stateHolder, IDLE_GUN_STATE );
+		Next( stateHolder, new_state );
 	}
 }
 
