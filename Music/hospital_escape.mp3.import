@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/hospital_escape.mp3-2ddefb679e3e4a8338599071b
 [params]
 
 loop=true
-loop_offset=43.9
+loop_offset=43.99
 bpm=0.0
 beat_count=0
 bar_beats=4
