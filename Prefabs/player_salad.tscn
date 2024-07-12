@@ -1,83 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1dgf4xd2lqnt"]
+[gd_scene load_steps=15 format=3 uid="uid://cltee2ndvp3ni"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerCoffee.cs" id="1_sc8ar"]
-[ext_resource type="Texture2D" uid="uid://c1jtipr4xipjl" path="res://Graphics/character movement.png" id="2_g55s0"]
-[ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_pxrb0"]
+[ext_resource type="Script" path="res://Scripts/PlayerSalad.cs" id="1_pvvvd"]
+[ext_resource type="Texture2D" uid="uid://c1jtipr4xipjl" path="res://Graphics/character movement.png" id="2_1nvar"]
+[ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_kruvq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
 size = Vector2(128, 128)
-
-[sub_resource type="Shader" id="Shader_cqhb7"]
-code = "shader_type canvas_item;
-
-uniform vec4 color : source_color = vec4(1.0);
-uniform float width : hint_range(0, 10) = 1.0;
-uniform int pattern : hint_range(0, 2) = 0; // diamond, circle, square
-uniform bool inside = false;
-uniform bool add_margins = true; // only useful when inside is false
-
-void vertex() {
-	if (add_margins) {
-		VERTEX += (UV * 2.0 - 1.0) * width;
-	}
-}
-
-bool hasContraryNeighbour(vec2 uv, vec2 texture_pixel_size, sampler2D texture) {
-	for (float i = -ceil(width); i <= ceil(width); i++) {
-		float x = abs(i) > width ? width * sign(i) : i;
-		float offset;
-		
-		if (pattern == 0) {
-			offset = width - abs(x);
-		} else if (pattern == 1) {
-			offset = floor(sqrt(pow(width + 0.5, 2) - x * x));
-		} else if (pattern == 2) {
-			offset = width;
-		}
-		
-		for (float j = -ceil(offset); j <= ceil(offset); j++) {
-			float y = abs(j) > offset ? offset * sign(j) : j;
-			vec2 xy = uv + texture_pixel_size * vec2(x, y);
-			
-			if ((xy != clamp(xy, vec2(0.0), vec2(1.0)) || texture(texture, xy).a <= 0.0) == inside) {
-				return true;
-			}
-		}
-	}
-	
-	return false;
-}
-
-void fragment() {
-	vec2 uv = UV;
-	
-	if (add_margins) {
-		vec2 texture_pixel_size = vec2(1.0) / (vec2(1.0) / TEXTURE_PIXEL_SIZE + vec2(width * 2.0));
-		
-		uv = (uv - texture_pixel_size * width) * TEXTURE_PIXEL_SIZE / texture_pixel_size;
-		
-		if (uv != clamp(uv, vec2(0.0), vec2(1.0))) {
-			COLOR.a = 0.0;
-		} else {
-			COLOR = texture(TEXTURE, uv);
-		}
-	} else {
-		COLOR = texture(TEXTURE, uv);
-	}
-	
-	if ((COLOR.a > 0.0) == inside && hasContraryNeighbour(uv, TEXTURE_PIXEL_SIZE, TEXTURE)) {
-		COLOR.rgb = inside ? mix(COLOR.rgb, color.rgb, color.a) : color.rgb;
-		COLOR.a += (1.0 - COLOR.a) * color.a;
-	}
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_de500"]
-shader = SubResource("Shader_cqhb7")
-shader_parameter/color = Color(1, 1, 1, 0.623529)
-shader_parameter/width = 0.0
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/add_margins = false
 
 [sub_resource type="Animation" id="Animation_msay2"]
 resource_name = "IDLE_left"
@@ -236,26 +164,18 @@ _data = {
 "walk_up": SubResource("Animation_1ob4f")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k34qm"]
-radius = 80.14
-
-[node name="PlayerCoffee" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "Sprite")]
-position = Vector2(565, 372)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("1_sc8ar")
-NpcBounceValue = 150.0
-AnimationPlayer = NodePath("AnimationPlayer")
-Sprite = NodePath("Sprite2D")
-Speed = 600.0
+[node name="PlayerSalad" type="CharacterBody2D"]
+position = Vector2(-280, 417)
+collision_layer = 2
+script = ExtResource("1_pvvvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7t14x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_de500")
 position = Vector2(-1.33514e-05, 1.04904e-05)
 scale = Vector2(8, 8)
-texture = ExtResource("2_g55s0")
+texture = ExtResource("2_1nvar")
 hframes = 4
 vframes = 5
 
@@ -265,11 +185,4 @@ libraries = {
 }
 
 [node name="InputHandler" type="Node" parent="."]
-script = ExtResource("3_pxrb0")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_k34qm")
-
-[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
+script = ExtResource("3_kruvq")

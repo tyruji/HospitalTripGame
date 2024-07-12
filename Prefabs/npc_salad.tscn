@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://025ec307ifjf"]
+
+[ext_resource type="Script" path="res://Scripts/NPCSalad.cs" id="1_cx87s"]
+[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_w2jfd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(128, 128)
+
+[node name="NPCSalad" type="CharacterBody2D"]
+modulate = Color(1, 1, 0.423529, 1)
+position = Vector2(-418, 160)
+script = ExtResource("1_cx87s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w2jfd")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
