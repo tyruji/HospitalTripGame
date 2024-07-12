@@ -57,7 +57,7 @@ public partial class Salad : Node2D
 	
 	private void HandleThrown( Node2D body )
 	{
-		if( body is _saladHolder ) return;
+		if( body == _saladHolder ) return;
 		
 		if( body is NPCSalad npc )
 		{
