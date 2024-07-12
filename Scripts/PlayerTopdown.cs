@@ -16,6 +16,12 @@ public partial class PlayerTopdown : PlayerBase, IAnimatable
 
 	private float _timer = 0;
 
+	public override void _Ready()
+	{
+		AnimationPlayer = GetNode<AnimationPlayer>( "AnimationPlayer" );
+		Sprite = GetNode<Sprite2D>( "Sprite2D" );
+	}
+
 	public void AddForceImpulse( Vector2 force, float bounce_time )
 	{
 		_force += force;

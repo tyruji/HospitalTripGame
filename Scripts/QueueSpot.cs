@@ -23,11 +23,12 @@ public partial class QueueSpot : Sprite2D
 		if( Taken ) return;
 		
 			// Replace with function body.
-		if( body is PlayerTopdown player )
+		if( body is PlayerCoffee player )
 		{
 			_queueManager.PlayerQueueIndex = QueueIndex;
 			Taken = true;
 			_queueOccupator = player;
+			player.Highlight();
 			return;
 		}
 		
@@ -36,6 +37,7 @@ public partial class QueueSpot : Sprite2D
 		_queueOccupator = npc;
 		npc.InQueue = true;
 		Taken = true;
+		npc.Highlight();
 	}
 
 	private void OnBodyExit( Node2D body )
@@ -46,15 +48,17 @@ public partial class QueueSpot : Sprite2D
 		
 		Taken = false;
 		
-		if( body is PlayerTopdown player )
+		if( body is PlayerCoffee player )
 		{
 			_queueManager.PlayerQueueIndex = -1;
 			
+			player.Unhighlight();
 			return;
 		}
 		
 		if( body is not NpcCoffee npc ) return;
 		
 		npc.InQueue = false;
+		npc.Unhighlight();
 	}
 }

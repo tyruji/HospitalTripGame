@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://d0hdefnqpivrj" path="res://Graphics/Tileset.png" id="1_3s26i"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
-[ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="2_jkn0t"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
+[ext_resource type="PackedScene" uid="uid://b1dgf4xd2lqnt" path="res://Prefabs/player_coffee.tscn" id="3_fm1o4"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_fqamx"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="6_d7ry1"]
 [ext_resource type="AudioStream" uid="uid://bn4jb7t1msjkv" path="res://Music/coffee_queue.mp3" id="7_woigc"]
@@ -2614,20 +2614,19 @@ autostart = true
 [node name="QueueSpots" type="Node2D" parent="CoffeeQueueManager"]
 
 [node name="QueueSpot0" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(363, 406)
+position = Vector2(391, 464)
 
 [node name="QueueSpot1" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(379, 628)
+position = Vector2(389, 688)
 
 [node name="QueueSpot2" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(398, 803)
+position = Vector2(410.255, 927.255)
 
 [node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
-position = Vector2(396, 958)
+position = Vector2(408.255, 1082.25)
 
-[node name="PlayerTopdown" parent="." instance=ExtResource("2_jkn0t")]
-position = Vector2(565, 372)
-scale = Vector2(0.5, 0.5)
+[node name="PlayerCoffee" parent="." instance=ExtResource("3_fm1o4")]
+position = Vector2(752, 478)
 
 [node name="TileMap2" type="TileMap" parent="." groups=["navigation"]]
 scale = Vector2(5, 5)
@@ -2675,6 +2674,21 @@ position = Vector2(656, 1113)
 [node name="NpcCoffee8" parent="NPCs" instance=ExtResource("5_fqamx")]
 position = Vector2(536, 1158)
 
+[node name="NpcCoffee14" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(680, 1326)
+
+[node name="NpcCoffee15" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(755, 1206)
+
+[node name="NpcCoffee16" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(475, 1502)
+
+[node name="NpcCoffee17" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(320, 1411)
+
+[node name="NpcCoffee18" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(606, 1470)
+
 [node name="NpcCoffee9" parent="NPCs" instance=ExtResource("5_fqamx")]
 position = Vector2(392, 1206)
 
@@ -2688,7 +2702,7 @@ navigation_polygon = SubResource("NavigationPolygon_l3gp8")
 [node name="Camera2D" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("6_d7ry1")]
 position = Vector2(1200, 1077)
 scale = Vector2(0.5, 0.5)
-Target = NodePath("../PlayerTopdown")
+Target = NodePath("../PlayerCoffee")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_woigc")
