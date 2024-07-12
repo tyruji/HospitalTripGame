@@ -247,6 +247,7 @@ NpcBounceValue = 150.0
 AnimationPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")
 Speed = 600.0
+Projectile = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7t14x")
