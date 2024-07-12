@@ -63,22 +63,27 @@ curve = SubResource("Curve2D_8p6to")
 [node name="NPCGuard" parent="." instance=ExtResource("5_gpjj7")]
 
 [node name="NpcCoffee" parent="." instance=ExtResource("5_l1aec")]
+PlayerBounceValue = 50.0
 TargetQueueIndex = 0
 
 [node name="NpcCoffee2" parent="." instance=ExtResource("5_l1aec")]
 position = Vector2(-78, 191)
+PlayerBounceValue = 50.0
 TargetQueueIndex = 1
 
 [node name="NpcCoffee3" parent="." instance=ExtResource("5_l1aec")]
 position = Vector2(-538, 463)
+PlayerBounceValue = 50.0
 TargetQueueIndex = 2
 
 [node name="NpcCoffee4" parent="." instance=ExtResource("5_l1aec")]
 position = Vector2(-176, 651)
+PlayerBounceValue = 50.0
 TargetQueueIndex = 3
 
 [node name="NpcCoffee5" parent="." instance=ExtResource("5_l1aec")]
 position = Vector2(-178, 846)
+PlayerBounceValue = 50.0
 TargetQueueIndex = 3
 
 [node name="NPCPath1" type="Path2D" parent="."]

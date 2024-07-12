@@ -4,10 +4,9 @@ using System;
 public partial class CoffeeQueueManager : Node
 {
 	  [Export]
-	  public Node2D[] QueuePositions = new Node2D[ 0 ];
-
-	  [Export]
 	  private Timer _timer = null;
+
+	  public int[] QueueSpotTargetCount = new int[ 0 ];
 
 	  public bool PlayerInQueue => PlayerQueueIndex >= 0;
 
@@ -25,11 +24,11 @@ public partial class CoffeeQueueManager : Node
 			_timer = GetNode<Timer>( "Timer" );
 
 			_timer.Timeout += AdvanceQueue;
+			QueueSpotTargetCount = new int[ GetNode( "QueueSpots" ).GetChildCount() ];
 	  }
 
 	  public void AdvanceQueue()
 	  {
-
 			OnQueueAdvance?.Invoke();
 	  }
 }

@@ -28,6 +28,12 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 
 	private int _currentPointIdx = 0;
 
+	private Vector2 _force = Vector2.Zero;
+
+	private float _bounceTime = 1;
+
+	private float _timer = 0;
+
 	public override void _Ready()
 	{
 		_navAgent = GetNode<NavigationAgent2D>( "NavigationAgent2D" );
@@ -50,11 +56,27 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 		Velocity = Speed * Direction;
 
 		State.Handle( this );
+		
+		_timer += ( float ) delta;
+		_force = _force.Lerp( Vector2.Zero, _timer / _bounceTime );
+		if( _timer > _bounceTime )
+		{
+			_force = Vector2.Zero;
+			return;
+		}
+		Velocity += _force;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		MoveAndSlide();
+	}
+
+	public void AddForceImpulse( Vector2 force, float bounce_time )
+	{
+		_force += force;
+		_bounceTime = bounce_time;
+		_timer = 0;
 	}
 
 	private void HandlePathFollow()
