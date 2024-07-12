@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
-[ext_resource type="PackedScene" uid="uid://b1dgf4xd2lqnt" path="res://Prefabs/player_coffee.tscn" id="3_fm1o4"]
+[ext_resource type="PackedScene" uid="uid://b1dgf4xd2lqnt" path="res://Prefabs/Cafe/player_coffee.tscn" id="3_fm1o4"]
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="4_fr0ph"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_fqamx"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="6_d7ry1"]
