@@ -80,7 +80,7 @@ public partial class NpcCoffee : NPCTopdown
 			return;
 		}
 		
-		if( _queueManager.PlayerInQueue )
+		if( _queueManager.PlayerInQueue && _queueManager.PlayerQueueIndex > 0 )
 		{
 			TargetQueueIndex = _queueManager.PlayerQueueIndex;
 			_targetSpot = GetSpot( TargetQueueIndex - 1 );
