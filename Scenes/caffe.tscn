@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cis30my5qeeci"]
+[gd_scene load_steps=11 format=3 uid="uid://cis30my5qeeci"]
 
 [ext_resource type="Texture2D" uid="uid://d0hdefnqpivrj" path="res://Graphics/Tileset.png" id="1_3s26i"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_fqamx"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="6_d7ry1"]
+[ext_resource type="AudioStream" uid="uid://bn4jb7t1msjkv" path="res://Music/coffee_queue.mp3" id="7_woigc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r63dp"]
 texture = ExtResource("1_3s26i")
@@ -2688,3 +2689,7 @@ navigation_polygon = SubResource("NavigationPolygon_l3gp8")
 position = Vector2(1200, 1077)
 scale = Vector2(0.5, 0.5)
 Target = NodePath("../PlayerTopdown")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_woigc")
+autoplay = true
