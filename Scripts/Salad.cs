@@ -24,6 +24,10 @@ public partial class Salad : Node2D
 	
 	private static readonly Godot.Collections.Array<Salad> _SALAD_ARRAY = new Godot.Collections.Array<Salad>();
 	
+	private PlayerSalad _player = null;
+	
+	private float _pickupRadiusSqr = 0;
+	
 	public static Salad GetClosestSalad( Vector2 pos )
 	{
 		Salad closest_salad = null;
@@ -45,14 +49,33 @@ public partial class Salad : Node2D
 	public override void _Ready()
 	{
 		_SALAD_ARRAY.Add( this );
+		
 		_area = GetNode<Area2D>( "Area2D" );
+		
+		_player = ( PlayerSalad )GetTree().GetFirstNodeInGroup( "player" );
+		
+		_pickupRadiusSqr = ( ( CircleShape2D ) 
+			GetNode<CollisionShape2D>( "Area2D/CollisionShape2D" ).Shape ).Radius;
+			
+		_pickupRadiusSqr *= _pickupRadiusSqr;
 	}
 	
 	public override void _Process( double delta )
 	{
-		if( !_thrown ) return;
+		if( !_thrown )
+		{
+			TryPickup( _player );
+			return;
+		}
 		
 		GlobalPosition += _Speed * ( float ) delta * _direction;
+	}
+	
+	public void TryPickup( Node2D body )
+	{
+		if( _thrown || this.GlobalPosition.DistanceSquaredTo( body.GlobalPosition ) > _pickupRadiusSqr ) return;
+		
+		HandleOnGround( body );
 	}
 	
 	public void Throw( Vector2 dir )
@@ -68,6 +91,7 @@ public partial class Salad : Node2D
 		{
 			npc.Salad = null;
 			npc.HoldingGun = false;
+			npc.CanAttack = false;
 			return;
 		}
 		
@@ -94,39 +118,36 @@ public partial class Salad : Node2D
 	{
 		if( body == _saladHolder ) return;
 		
+		_saladHolder = null;
+		_thrown = false;
+		
 		if( body is NPCSalad npc )
 		{
 			npc.AddForceImpulse( _BounceValue * _direction, _BounceTime );
-			_saladHolder = null;
-			_thrown = false;
 			return;
 		}
 		
 		if( body is PlayerSalad player )
 		{
 			player.AddForceImpulse( _BounceValue * _direction, _BounceTime );
-			_saladHolder = null;
-			_thrown = false;
 			return;
 		}
-		
-		_saladHolder = null;
-		_thrown = false;
 	}
 	
 	private void HandleOnGround( Node2D body )
 	{
-		if( body is NPCSalad npc )
+		if( body is NPCSalad npc && npc.Salad == null )
 		{
 			npc.Salad = this;
 			npc.HoldingGun = true;
 			_saladHolder = npc;
+			npc.CanAttack = true;
 			this.Visible = false;
 			_area.CallDeferred( "set", "monitoring", false );
 			return;
 		}
 		
-		if( body is PlayerSalad player )
+		if( body is PlayerSalad player && player.Salad == null)
 		{
 			player.CanAttack = true;
 			player.Salad = this;

@@ -63,14 +63,14 @@ public class MovingState : CharacterState
 
 		if( stateHolder is IAttacker attacker )
 		{
-			if( attacker.Attacking )
-			{
-				Next( stateHolder, PUNCHING_STATE );
-				return;
-			}
 			if( attacker.HoldingGun )
 			{
 				Next( stateHolder, MOVING_GUN_STATE );
+				return;
+			}
+			if( attacker.Attacking )
+			{
+				Next( stateHolder, PUNCHING_STATE );
 				return;
 			}
 		}
@@ -107,15 +107,15 @@ public class MovingGunState : CharacterState
 			return;
 		}   
 
-		if( attacker.Attacking )
-		{
-			Next( stateHolder, SHOOTING_STATE );
-			return;
-		}
-
 		if( !attacker.HoldingGun )
 		{
 			Next( stateHolder, MOVING_STATE );
+			return;
+		}
+		
+		if( attacker.Attacking )
+		{
+			Next( stateHolder, SHOOTING_STATE );
 			return;
 		}
 
@@ -157,14 +157,14 @@ public class IdleState : CharacterState
 
 		if( stateHolder is IAttacker attacker )
 		{
-			if( attacker.Attacking )
-			{
-				Next( stateHolder, PUNCHING_STATE );
-				return;
-			}
 			if( attacker.HoldingGun )
 			{
 				Next( stateHolder, IDLE_GUN_STATE );
+				return;
+			}
+			if( attacker.Attacking )
+			{
+				Next( stateHolder, PUNCHING_STATE );
 				return;
 			}
 		}

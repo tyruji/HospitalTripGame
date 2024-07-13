@@ -2,7 +2,7 @@ using Godot;
 using System;
 using static CharacterStates;
 
-public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IAnimatable
+public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder, IAnimatable
 {
 	// Integrate like a NavMesh agent and shit here
 	// make functions to move the npc to a chosen position
@@ -15,6 +15,12 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 
 	[Export]
 	public float MinPointDistance { get; set; } = 50f;
+
+	[Export]
+	public AnimationPlayer AnimationPlayer { get; private set; } = null;
+
+	[Export]
+	public Sprite2D Sprite { get; set; } = null;
 
 	public Vector2 TargetPosition { get => _navAgent.TargetPosition; set => _navAgent.TargetPosition = value;}
 
@@ -37,7 +43,8 @@ public partial class NPCTopdown : CharacterBody2D, IMoveable, IStateHolder//, IA
 	public override void _Ready()
 	{
 		_navAgent = GetNode<NavigationAgent2D>( "NavigationAgent2D" );
-
+		AnimationPlayer = GetNode<AnimationPlayer>( "AnimationPlayer" );
+		Sprite = GetNode<Sprite2D>( "Sprite2D" );
 	}
 
 	public override void _Process( double delta )

@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=11 format=3 uid="uid://bmfkr4nyq7maj"]
 
 [ext_resource type="PackedScene" uid="uid://cltee2ndvp3ni" path="res://Prefabs/Salad/player_salad.tscn" id="1_qjbig"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
 [ext_resource type="PackedScene" uid="uid://025ec307ifjf" path="res://Prefabs/Salad/npc_salad.tscn" id="4_knou3"]
-[ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
 [ext_resource type="PackedScene" uid="uid://dospg0v5wfbsa" path="res://Prefabs/Salad/salad.tscn" id="7_fi25w"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="7_sy1hh"]
 
@@ -22,9 +21,6 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 163, 177, 0, 0, 0, 0, 44, 414, 0, 0, 0, 0, 199, 566, 0, 0, 0, 0, 438, 539, 0, 0, 0, 0, 480, 295, 0, 0, 0, 0, 163, 177)
 }
 point_count = 6
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_256ai"]
-size = Vector2(128, 128)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3h1ff"]
 vertices = PackedVector2Array(1261, -327, 1495, 1440, -701, 1157, -985, -383)
@@ -57,20 +53,6 @@ curve = SubResource("Curve2D_8p6to")
 
 [node name="NPCPath1" type="Path2D" parent="."]
 curve = SubResource("Curve2D_51fmw")
-
-[node name="NPC_Patrol" type="CharacterBody2D" parent="." node_paths=PackedStringArray("Path")]
-position = Vector2(309, 185)
-script = ExtResource("5_lhpo4")
-Path = NodePath("../NPCPath1")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NPC_Patrol"]
-shape = SubResource("RectangleShape2D_256ai")
-
-[node name="Sprite2D" type="Sprite2D" parent="NPC_Patrol"]
-self_modulate = Color(0.654902, 0.184314, 0.92549, 1)
-texture = ExtResource("2_c0wca")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="NPC_Patrol"]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(24, -17)
