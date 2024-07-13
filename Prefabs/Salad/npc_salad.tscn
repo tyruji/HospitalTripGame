@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://025ec307ifjf"]
+[gd_scene load_steps=24 format=3 uid="uid://025ec307ifjf"]
 
 [ext_resource type="Script" path="res://Scripts/NPCSalad.cs" id="1_cx87s"]
-[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_w2jfd"]
+[ext_resource type="Texture2D" uid="uid://cx7e25tdw2yt0" path="res://Graphics/enemy_bez_kapusty.png" id="2_7b7h2"]
+[ext_resource type="Texture2D" uid="uid://drwuhjd37hgfs" path="res://Graphics/enemy.png" id="2_jvj3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
 size = Vector2(128, 128)
@@ -60,7 +61,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [3]
 }
 
 [sub_resource type="Animation" id="Animation_b0ra2"]
@@ -92,7 +93,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [12]
+"values": [9]
 }
 
 [sub_resource type="Animation" id="Animation_1y0hm"]
@@ -221,7 +222,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [4, 5, 4, 6]
+"values": [4, 3, 5, 3]
 }
 
 [sub_resource type="Animation" id="Animation_k5nqa"]
@@ -255,7 +256,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [13, 15, 14, 15]
+"values": [10, 9, 11, 9]
 }
 
 [sub_resource type="Animation" id="Animation_vgsmo"]
@@ -334,15 +335,24 @@ _data = {
 [node name="NPCSalad" type="CharacterBody2D"]
 modulate = Color(1, 1, 0.423529, 1)
 script = ExtResource("1_cx87s")
+MinPointDistance = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1480h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_w2jfd")
+scale = Vector2(8, 8)
+texture = ExtResource("2_7b7h2")
+hframes = 3
+vframes = 4
 
 [node name="saladSprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_w2jfd")
+visible = false
+scale = Vector2(8, 8)
+texture = ExtResource("2_jvj3u")
+hframes = 4
+vframes = 8
+frame = 8
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
