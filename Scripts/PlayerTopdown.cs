@@ -8,7 +8,7 @@ public partial class PlayerTopdown : PlayerBase, IAnimatable
 	public AnimationPlayer AnimationPlayer { get; private set; } = null;
 
 	[Export]
-	public Sprite2D Sprite { get; private set; } = null;
+	public Sprite2D Sprite { get; set; } = null;
 
 	private Vector2 _force = Vector2.Zero;
 

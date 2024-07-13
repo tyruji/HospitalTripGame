@@ -1,12 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmfkr4nyq7maj"]
+[gd_scene load_steps=13 format=3 uid="uid://bmfkr4nyq7maj"]
 
-[ext_resource type="PackedScene" uid="uid://cltee2ndvp3ni" path="res://Prefabs/player_salad.tscn" id="1_qjbig"]
+[ext_resource type="PackedScene" uid="uid://cltee2ndvp3ni" path="res://Prefabs/Salad/player_salad.tscn" id="1_qjbig"]
 [ext_resource type="PackedScene" uid="uid://d05nwq3xu8lpk" path="res://Prefabs/player_platformer.tscn" id="2_1aoy3"]
 [ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_c0wca"]
-[ext_resource type="PackedScene" uid="uid://025ec307ifjf" path="res://Prefabs/npc_salad.tscn" id="4_knou3"]
+[ext_resource type="PackedScene" uid="uid://025ec307ifjf" path="res://Prefabs/Salad/npc_salad.tscn" id="4_knou3"]
 [ext_resource type="Script" path="res://Scripts/NPCTopdown.cs" id="5_lhpo4"]
+[ext_resource type="PackedScene" uid="uid://dospg0v5wfbsa" path="res://Prefabs/Salad/salad.tscn" id="7_fi25w"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="7_sy1hh"]
-[ext_resource type="Script" path="res://Scripts/Salad.cs" id="7_tk128"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbd2m"]
 size = Vector2(1172, 41)
@@ -31,9 +31,6 @@ vertices = PackedVector2Array(1261, -327, 1495, 1440, -701, 1157, -985, -383)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1270, -337, 1507, 1452, -710, 1167, -998, -394)])
 source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_0rqme"]
-radius = 33.3766
 
 [node name="test_scene" type="Node2D"]
 
@@ -80,20 +77,6 @@ position = Vector2(24, -17)
 navigation_polygon = SubResource("NavigationPolygon_3h1ff")
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("7_sy1hh")]
-Target = NodePath("")
+Target = NodePath("../PlayerSalad")
 
-[node name="Salad" type="Node2D" parent="."]
-position = Vector2(668, 898)
-script = ExtResource("7_tk128")
-
-[node name="Sprite2D" type="Sprite2D" parent="Salad"]
-modulate = Color(0, 0.744571, 3.85046e-07, 1)
-scale = Vector2(0.405, 0.405)
-texture = ExtResource("2_c0wca")
-
-[node name="Area2D" type="Area2D" parent="Salad"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Salad/Area2D"]
-shape = SubResource("CircleShape2D_0rqme")
-
-[connection signal="body_entered" from="Salad/Area2D" to="Salad" method="OnBodyEntered"]
+[node name="Salad" parent="." instance=ExtResource("7_fi25w")]

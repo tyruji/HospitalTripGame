@@ -36,6 +36,8 @@ public partial class InputHandler : Node
 			_player.PreviousDirection = _player.Direction;
 			_player.Direction = _rawDir.Normalized();
 		}
+		
+		if( !_player.CanAttack ) return;
 
 		_player.Attacking = _player.Attacking != @event.IsActionPressed( "attack", true, true );
 		if( _player.Attacking ) _player.PreviousDirection = _player.AttackDirection;

@@ -5,6 +5,10 @@ public partial class NPCSalad : NPCTopdown, IAttacker
 {
 	public Salad Salad { get; set; }
 	
+	public bool CanAttack { get; set; } = true;
+	
+	public bool AttackAtEnd { get; set; } = true;
+	
 	public bool Attacking { get; set; }
 
 	public bool HoldingGun { get; set; }

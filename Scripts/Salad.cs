@@ -4,7 +4,7 @@ using System;
 public partial class Salad : Node2D
 {
 	[Export]
-	private float _Speed = 100f;
+	private float _Speed = 1000f;
 	
 	[Export]
 	private float _BounceValue = 1000f;
@@ -18,6 +18,13 @@ public partial class Salad : Node2D
 	
 	private Node2D _saladHolder = null;
 	
+	private Area2D _area = null;
+	
+	public override void _Ready()
+	{
+		_area = GetNode<Area2D>( "Area2D" );
+	}
+	
 	public override void _Process( double delta )
 	{
 		if( !_thrown ) return;
@@ -29,6 +36,10 @@ public partial class Salad : Node2D
 	{
 		_thrown = true;
 		_direction = dir;
+		GlobalPosition = _saladHolder.GlobalPosition;
+		
+		this.Visible = true;
+		_area.CallDeferred( "set", "monitoring", true );
 		
 		if( _saladHolder is NPCSalad npc )
 		{
@@ -41,6 +52,7 @@ public partial class Salad : Node2D
 		{
 			player.Salad = null;
 			player.HoldingGun = false;
+			player.CanAttack = false;
 			return;
 		}
 	}
@@ -74,6 +86,9 @@ public partial class Salad : Node2D
 			_thrown = false;
 			return;
 		}
+		
+		_saladHolder = null;
+		_thrown = false;
 	}
 	
 	private void HandleOnGround( Node2D body )
@@ -83,14 +98,19 @@ public partial class Salad : Node2D
 			npc.Salad = this;
 			npc.HoldingGun = true;
 			_saladHolder = npc;
+			this.Visible = false;
+			_area.CallDeferred( "set", "monitoring", false );
 			return;
 		}
 		
 		if( body is PlayerSalad player )
 		{
+			player.CanAttack = true;
 			player.Salad = this;
 			player.HoldingGun = true;
 			_saladHolder = player;
+			this.Visible = false;
+			_area.CallDeferred( "set", "monitoring", false );
 			return;
 		}
 	}

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dospg0v5wfbsa"]
+
+[ext_resource type="Script" path="res://Scripts/Salad.cs" id="1_g4ygc"]
+[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_jm0nt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0rqme"]
+radius = 33.3766
+
+[node name="Salad" type="Node2D"]
+position = Vector2(396, -133)
+script = ExtResource("1_g4ygc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.744571, 3.85046e-07, 1)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("2_jm0nt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_0rqme")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

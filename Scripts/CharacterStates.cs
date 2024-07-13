@@ -304,7 +304,7 @@ public class ShootingState : CharacterState
 		var dir = attacker.AttackDirection;
 
 		// SPAWN PROJECTILE
-		attacker.Shoot();
+		if( !attacker.AttackAtEnd ) attacker.Shoot();
 
 		animatable.Sprite.FlipH = dir.X < 0;
 
@@ -331,6 +331,7 @@ public class ShootingState : CharacterState
 		IAttacker attacker = ( IAttacker )stateHolder;
 
 		attacker.Attacking = false;
+		if( attacker.AttackAtEnd ) attacker.Shoot();
 	}
 
 	public override void Handle( IStateHolder stateHolder )
