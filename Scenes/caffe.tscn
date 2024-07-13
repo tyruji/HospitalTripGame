@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cis30my5qeeci"]
+[gd_scene load_steps=10 format=3 uid="uid://cis30my5qeeci"]
 
+[ext_resource type="PackedScene" uid="uid://inosr4imj748" path="res://Prefabs/next_level_door.tscn" id="1_0isch"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
 [ext_resource type="PackedScene" uid="uid://b1dgf4xd2lqnt" path="res://Prefabs/Cafe/player_coffee.tscn" id="3_fm1o4"]
@@ -16,6 +17,9 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 
 [node name="Caffe" type="Node2D"]
+
+[node name="NextLevelDoor" parent="." instance=ExtResource("1_0isch")]
+visible = false
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("1_w4n55")
