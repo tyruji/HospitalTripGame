@@ -10,8 +10,12 @@ public abstract partial class PlayerBase : CharacterBody2D, IStateHolder, IMovea
 	[Export]
 	public Vector2 Direction { get; set; } = Vector2.Zero;
 
+	public bool AttackAtEnd { get; set; } = true;
+
 	[Export]
 	public Vector2 PreviousDirection { get; set; } = Vector2.Zero;
+
+	public bool CanAttack { get; set; } = false;
 
 	public bool Attacking { get; set; }
 
