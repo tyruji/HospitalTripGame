@@ -12,6 +12,8 @@ public partial class Salad : Node2D
 	[Export]
 	private float _BounceTime = 1.0f;
 	
+	public bool HasOwner => _saladHolder != null;
+	
 	private bool _thrown = false;
 	
 	private Vector2 _direction = Vector2.Zero;
@@ -20,8 +22,29 @@ public partial class Salad : Node2D
 	
 	private Area2D _area = null;
 	
+	private static readonly Godot.Collections.Array<Salad> _SALAD_ARRAY = new Godot.Collections.Array<Salad>();
+	
+	public static Salad GetClosestSalad( Vector2 pos )
+	{
+		Salad closest_salad = null;
+		float last_distance = float.MaxValue;
+		
+		foreach( var salad in _SALAD_ARRAY )
+		{
+			float new_distance = salad.GlobalPosition.DistanceSquaredTo( pos );
+			
+			if( new_distance > last_distance || salad.HasOwner ) continue;
+			
+			closest_salad = salad;
+			last_distance = new_distance;
+		}
+		
+		return closest_salad;
+	}
+	
 	public override void _Ready()
 	{
+		_SALAD_ARRAY.Add( this );
 		_area = GetNode<Area2D>( "Area2D" );
 	}
 	
