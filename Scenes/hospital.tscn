@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://c6u4138taa21f"]
 
-[ext_resource type="PackedScene" uid="uid://b7a25kekn6wox" path="res://Prefabs/npc_guard.tscn" id="1_27q1u"]
+[ext_resource type="PackedScene" uid="uid://b7a25kekn6wox" path="res://Prefabs/Hospital/npc_guard.tscn" id="1_27q1u"]
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="1_a8hq1"]
 [ext_resource type="PackedScene" uid="uid://dfdk008ne3kfn" path="res://Prefabs/player_topdown.tscn" id="2_2sd3e"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="3_oihb2"]
