@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://drwuhjd37hgfs" path="res://Graphics/enemy.png" id="2_jvj3u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
-size = Vector2(128, 128)
+size = Vector2(32, 64)
 
 [sub_resource type="Animation" id="Animation_hhxwq"]
 resource_name = "IDLE_left"
@@ -341,14 +341,14 @@ MinPointDistance = 20.0
 shape = SubResource("RectangleShape2D_1480h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(8, 8)
+scale = Vector2(4, 4)
 texture = ExtResource("2_7b7h2")
 hframes = 3
 vframes = 4
 
 [node name="saladSprite" type="Sprite2D" parent="."]
 visible = false
-scale = Vector2(8, 8)
+scale = Vector2(4, 4)
 texture = ExtResource("2_jvj3u")
 hframes = 4
 vframes = 8

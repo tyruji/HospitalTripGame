@@ -8,9 +8,12 @@ public partial class NextLevelDoor : Node2D
 	
 	private static bool _IN_TRANSITION = false;
 	
+	protected PlayerBase _player = null;
+	
 	public override void _Ready()
 	{
 		SceneStart();
+		_player = ( PlayerBase ) GetTree().GetFirstNodeInGroup( "player" );
 	}
 	
 	protected void SceneStart()
@@ -22,6 +25,7 @@ public partial class NextLevelDoor : Node2D
 	
 	protected virtual void NextScene()
 	{
+		_player.Speed = 0;
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty( GetNode( "ScreenDarken" ), "modulate", Colors.White, 1.0f ).SetTrans( Tween.TransitionType.Sine );
 		tween.TweenCallback( Callable.From( LoadScene ) );

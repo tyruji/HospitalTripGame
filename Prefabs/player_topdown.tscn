@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c1jtipr4xipjl" path="res://Graphics/character movement.png" id="3_tqfak"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
-size = Vector2(128, 128)
+size = Vector2(32, 64)
 
 [sub_resource type="Animation" id="Animation_msay2"]
 resource_name = "IDLE_left"
@@ -176,7 +176,7 @@ shape = SubResource("RectangleShape2D_7t14x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.33514e-05, 1.04904e-05)
-scale = Vector2(8, 8)
+scale = Vector2(4, 4)
 texture = ExtResource("3_tqfak")
 hframes = 4
 vframes = 5
