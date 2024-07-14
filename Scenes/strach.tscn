@@ -1,8 +1,45 @@
-[gd_scene load_steps=4 format=3 uid="uid://crcw85q2hh6yf"]
+[gd_scene load_steps=6 format=3 uid="uid://crcw85q2hh6yf"]
 
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="1_555g8"]
-[ext_resource type="Texture2D" uid="uid://c1jtipr4xipjl" path="res://Graphics/character movement.png" id="2_sa2qt"]
-[ext_resource type="AudioStream" uid="uid://dxctlly2htm12" path="res://Music/last.mp3" id="3_1xup3"]
+[ext_resource type="Texture2D" uid="uid://41ti4e0q88gg" path="res://Graphics/strach.png" id="2_orv36"]
+
+[sub_resource type="Animation" id="Animation_txw31"]
+resource_name = "atlk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../strachg/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.896062),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_4241r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../strachg/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hnumi"]
+_data = {
+"RESET": SubResource("Animation_4241r"),
+"atlk": SubResource("Animation_txw31")
+}
 
 [node name="Strach" type="Node2D"]
 
@@ -17,13 +54,17 @@ layer_1/tile_data = PackedInt32Array(-655363, 4653056, 15, -589827, 4653056, 15,
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array()
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(672, 347)
-scale = Vector2(4, 4)
-texture = ExtResource("2_sa2qt")
-hframes = 4
-vframes = 5
+[node name="strachg" type="Node" parent="."]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_1xup3")
-autoplay = true
+[node name="Sprite2D" type="Sprite2D" parent="strachg"]
+position = Vector2(509, 233)
+scale = Vector2(5, 5)
+texture = ExtResource("2_orv36")
+hframes = 2
+vframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="strachg"]
+root_node = NodePath("../../TileMap2")
+libraries = {
+"": SubResource("AnimationLibrary_hnumi")
+}
