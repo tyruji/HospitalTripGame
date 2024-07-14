@@ -175,10 +175,9 @@ shape = SubResource("RectangleShape2D_1480h")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sight" type="Node2D" parent="."]
-rotation = 4.71239
+rotation = 1.5708
 
 [node name="GuardNextLevelDoor" parent="Sight" instance=ExtResource("2_f51hu")]
-visible = false
 position = Vector2(-230, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

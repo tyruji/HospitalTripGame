@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6u4138taa21f"]
+[gd_scene load_steps=11 format=3 uid="uid://c6u4138taa21f"]
 
 [ext_resource type="PackedScene" uid="uid://b7a25kekn6wox" path="res://Prefabs/Hospital/npc_guard.tscn" id="1_27q1u"]
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="1_a8hq1"]
@@ -11,6 +11,24 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 308, 918, 0, 0, 0, 0, 314, 738)
 }
 point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_xl5c7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1128, 405, 0, 0, 0, 0, 1247, 254, 0, 0, 0, 0, 713, 260, 0, 0, 0, 0, 896, 419, 0, 0, 0, 0, 1128, 405)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_4aw76"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1754, 415, 0, 0, 0, 0, 1756, 213, 0, 0, 0, 0, 1756, 297, 0, 0, 0, 0, 1754, 415)
+}
+point_count = 4
+
+[sub_resource type="Curve2D" id="Curve2D_8a7ks"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1679, 387, 0, 0, 0, 0, 1967, 228, 0, 0, 0, 0, 2190, 391, 0, 0, 0, 0, 2547, 228, 0, 0, 0, 0, 2190, 375, 0, 0, 0, 0, 1970, 215, 0, 0, 0, 0, 1679, 387)
+}
+point_count = 7
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_xlaik"]
 vertices = PackedVector2Array(4616, -3582, 4254, -738, 4254, -1585, 2394, -1245, 2874, -1245, 2874, -385, 2474, -385, 2474, 195, 3434, 195, 3434, 415, 554, 415, 814, 915, 814, 835, 1274, 835, 1274, 1135, 814, 1135, 814, 975, 554, 915, 174, 975, 174, 195, 2174, 195, 2174, -385, 2254, -1245, 1774, -385, 1774, -1245, 2394, -1585, 2254, -1985, 1214, -1985, 1214, -2045, 2254, -2045, 2254, -2605, 2394, -2605, 2394, -1645, 3534, -1645, 874, -2785, 874, -465, 32, -465, 26, -3538, 3534, -2785)
@@ -26,12 +44,39 @@ source_geometry_group_name = &"navigation"
 [node name="Path1" type="Path2D" parent="GuardPaths"]
 curve = SubResource("Curve2D_ln1nh")
 
+[node name="Path2" type="Path2D" parent="GuardPaths"]
+curve = SubResource("Curve2D_xl5c7")
+
+[node name="Path3" type="Path2D" parent="GuardPaths"]
+curve = SubResource("Curve2D_4aw76")
+
+[node name="Path4" type="Path2D" parent="GuardPaths"]
+curve = SubResource("Curve2D_8a7ks")
+
 [node name="Guards" type="Node2D" parent="."]
 
 [node name="NPCGuard1" parent="Guards" node_paths=PackedStringArray("Path") instance=ExtResource("1_27q1u")]
 position = Vector2(302, 729)
 Speed = 50.0
 Path = NodePath("../../GuardPaths/Path1")
+
+[node name="NPCGuard2" parent="Guards" node_paths=PackedStringArray("_Sight", "Path") instance=ExtResource("1_27q1u")]
+position = Vector2(1023, 384)
+_Sight = NodePath("../NPCGuard1/Sight")
+Speed = 50.0
+Path = NodePath("../../GuardPaths/Path2")
+
+[node name="NPCGuard3" parent="Guards" node_paths=PackedStringArray("_Sight", "Path") instance=ExtResource("1_27q1u")]
+position = Vector2(1769, 320)
+_Sight = NodePath("../NPCGuard1/Sight")
+Speed = 130.0
+Path = NodePath("../../GuardPaths/Path3")
+
+[node name="NPCGuard4" parent="Guards" node_paths=PackedStringArray("_Sight", "Path") instance=ExtResource("1_27q1u")]
+position = Vector2(2086, 323)
+_Sight = NodePath("../NPCGuard1/Sight")
+Speed = 100.0
+Path = NodePath("../../GuardPaths/Path4")
 
 [node name="TileMap2" type="TileMap" parent="." groups=["navigation"]]
 position = Vector2(84, 25)

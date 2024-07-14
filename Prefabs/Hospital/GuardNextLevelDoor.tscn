@@ -1,12 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://dokl7wjvu2hgh"]
+[gd_scene load_steps=5 format=3 uid="uid://dokl7wjvu2hgh"]
 
 [ext_resource type="Script" path="res://Scripts/GuardNextLevelDoor.cs" id="1_avljo"]
 [ext_resource type="Texture2D" uid="uid://dmurasncgkefn" path="res://Graphics/enemysight.png" id="2_0x83f"]
+
+[sub_resource type="Shader" id="Shader_okcrq"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+void fragment() {
+    vec4 screen_col = textureLod(screen_texture, SCREEN_UV, 0.0);
+	COLOR.a = .5 * step( 0.001, COLOR.a * screen_col.r * screen_col.g * screen_col.b );
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mrb0w"]
+shader = SubResource("Shader_okcrq")
 
 [node name="GuardNextLevelDoor" type="Node2D"]
 script = ExtResource("1_avljo")
 
 [node name="ScreenDarken" type="ColorRect" parent="."]
+visible = false
 z_index = 530
 custom_minimum_size = Vector2(42069, 42069)
 anchors_preset = 8
@@ -26,6 +40,7 @@ polygon = PackedVector2Array(233, -1, -256, -249, -256, 250)
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.454902)
+material = SubResource("ShaderMaterial_mrb0w")
 scale = Vector2(4, 8)
 texture = ExtResource("2_0x83f")
 

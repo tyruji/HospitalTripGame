@@ -4,12 +4,12 @@
 [ext_resource type="Script" path="res://Scripts/QueueSpot.cs" id="2_fyvqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2icqm"]
-radius = 46.6476
+radius = 177.658
 
 [node name="QueueSpot0" type="Sprite2D"]
 self_modulate = Color(0.270222, 0.270222, 0.270222, 1)
 rotation = 0.785398
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.16, 0.16)
 texture = ExtResource("1_1e1q8")
 script = ExtResource("2_fyvqm")
 
