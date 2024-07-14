@@ -7,7 +7,9 @@
 radius = 177.658
 
 [node name="QueueSpot0" type="Sprite2D"]
+modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0.270222, 0.270222, 0.270222, 1)
+z_index = -1
 rotation = 0.785398
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("1_1e1q8")

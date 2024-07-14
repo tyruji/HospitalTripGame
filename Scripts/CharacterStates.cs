@@ -197,6 +197,8 @@ public class IdleGunState : CharacterState
 			return;
 		}
 
+		moveable.Velocity = Vector2.Zero;
+	
 		if( stateHolder is not IAttacker attacker )
 		{
 			GD.PrintErr( "No IAttacker interface on attacking object" );
