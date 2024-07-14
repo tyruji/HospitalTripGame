@@ -4,37 +4,43 @@ using System;
 public partial class NextLevelDoor : Node2D
 {
 	[Export]
-	private PackedScene _NextScene = null;
+	protected PackedScene _NextScene = null;
+	
+	private static bool _IN_TRANSITION = false;
 	
 	public override void _Ready()
 	{
 		SceneStart();
 	}
 	
-	private void SceneStart()
+	protected void SceneStart()
 	{
 		this.Visible = true;
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty( GetNode( "ScreenDarken" ), "modulate", new Color( 0,0,0,0 ), 1.0f ).SetTrans( Tween.TransitionType.Sine );
 	}
 	
-	private void NextScene()
+	protected virtual void NextScene()
 	{
 		Tween tween = GetTree().CreateTween();
 		tween.TweenProperty( GetNode( "ScreenDarken" ), "modulate", Colors.White, 1.0f ).SetTrans( Tween.TransitionType.Sine );
 		tween.TweenCallback( Callable.From( LoadScene ) );
+		tween.TweenCallback( Callable.From( LeaveTransition ) );
 	}
 	
-	private void LoadScene()
+	protected virtual void LoadScene()
 	{
 		if( _NextScene == null ) return;
 		
 		GetTree().ChangeSceneToPacked( _NextScene );
 	} 
 	
+	protected void LeaveTransition() => _IN_TRANSITION = false;
+	
 	private void OnBodyEntered( Node2D body )
 	{
-		if( body is not PlayerBase ) return;
+		if( body is not PlayerBase || _IN_TRANSITION ) return;
+		_IN_TRANSITION = true;
 		NextScene();
 	}	
 }
