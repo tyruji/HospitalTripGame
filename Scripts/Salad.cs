@@ -28,6 +28,16 @@ public partial class Salad : Node2D
 	
 	private float _pickupRadiusSqr = 0;
 	
+	public static Salad GetRandomSalad()
+	{
+		foreach( var new_salad in _SALAD_ARRAY )
+		{
+			if( GD.Randi() % 2 == 0 ) continue;
+			return new_salad;
+		}
+		return null;
+	}
+	
 	public static Salad GetClosestSalad( Vector2 pos )
 	{
 		Salad closest_salad = null;

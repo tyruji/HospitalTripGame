@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://025ec307ifjf"]
+[gd_scene load_steps=25 format=3 uid="uid://025ec307ifjf"]
 
 [ext_resource type="Script" path="res://Scripts/NPCSalad.cs" id="1_cx87s"]
 [ext_resource type="Texture2D" uid="uid://cx7e25tdw2yt0" path="res://Graphics/enemy_bez_kapusty.png" id="2_7b7h2"]
@@ -332,9 +332,13 @@ _data = {
 "walk_up_gun": SubResource("Animation_lkl4g")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ha1k2"]
+radius = 45.62
+
 [node name="NPCSalad" type="CharacterBody2D"]
 modulate = Color(1, 1, 0.423529, 1)
 script = ExtResource("1_cx87s")
+NpcBounceValue = 900.0
 MinPointDistance = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -360,3 +364,10 @@ frame = 8
 libraries = {
 "": SubResource("AnimationLibrary_ih8x5")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ha1k2")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
