@@ -31,11 +31,13 @@ public partial class CoffeeQueueManager : Node
 
 		_timer.Timeout += AdvanceQueue;
 		QueueSpotTargetCount = new int[ GetNode( "QueueSpots" ).GetChildCount() ];
+		CallDeferred( "AdvanceQueue" );
 	}
 
 	public void AdvanceQueue()
 	{
 		OnQueueAdvance?.Invoke();
+		GetNode<AnimationPlayer>( "AnimationPlayer" ).Play( "coffee" );
 	}
 	
 	public void SpawnNewNpc()
