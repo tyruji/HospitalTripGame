@@ -3,7 +3,6 @@ using System;
 
 public partial class GuardNextLevelDoor : NextLevelDoor
 {
-	private PlayerTopdown _player = null;
 	private Camera _cam = null;
 	private Vector2 _startPlayerPos = Vector2.Zero;
 	
@@ -11,7 +10,6 @@ public partial class GuardNextLevelDoor : NextLevelDoor
 	{
 		base._Ready();
 		_cam = ( Camera ) GetTree().GetFirstNodeInGroup( "camera" );
-		_player = ( PlayerTopdown ) GetTree().GetFirstNodeInGroup( "player" );
 		_startPlayerPos = _player.GlobalPosition;
 	}
 	

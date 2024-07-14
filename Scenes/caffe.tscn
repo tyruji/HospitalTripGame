@@ -1,13 +1,99 @@
-[gd_scene load_steps=10 format=3 uid="uid://cis30my5qeeci"]
+[gd_scene load_steps=15 format=3 uid="uid://cis30my5qeeci"]
 
 [ext_resource type="PackedScene" uid="uid://inosr4imj748" path="res://Prefabs/next_level_door.tscn" id="1_0isch"]
 [ext_resource type="Script" path="res://Scripts/CoffeeQueueManager.cs" id="1_w4n55"]
+[ext_resource type="PackedScene" uid="uid://c7n5va2mfs7ey" path="res://Scenes/park.tscn" id="2_ghrxq"]
 [ext_resource type="PackedScene" uid="uid://mt62k3w2rory" path="res://Prefabs/QueueSpot.tscn" id="2_k1qad"]
 [ext_resource type="PackedScene" uid="uid://b1dgf4xd2lqnt" path="res://Prefabs/Cafe/player_coffee.tscn" id="3_fm1o4"]
 [ext_resource type="TileSet" uid="uid://bat52ovawm1l4" path="res://resources/caffe.tres" id="4_fr0ph"]
 [ext_resource type="PackedScene" uid="uid://cs72nn5bw7afl" path="res://Prefabs/Cafe/npc_coffee.tscn" id="5_fqamx"]
+[ext_resource type="Texture2D" uid="uid://bteytqr46jml4" path="res://Graphics/cpffee.png" id="5_v8op3"]
 [ext_resource type="PackedScene" uid="uid://b1fmoctb40ipg" path="res://Prefabs/camera_2d.tscn" id="6_d7ry1"]
 [ext_resource type="AudioStream" uid="uid://bn4jb7t1msjkv" path="res://Music/coffee_queue.mp3" id="7_woigc"]
+
+[sub_resource type="Animation" id="Animation_hbopx"]
+resource_name = "coffee"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coffee:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(360, 340), Vector2(360, 317), Vector2(360, 305), Vector2(360, 317), Vector2(360, 340)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coffee:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.670588), Color(1, 1, 1, 0.670588)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coffee:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(2, 1e-05), Vector2(-2, 1), Vector2(2, 1.7), Vector2(2, 2), Vector2(2, 1.7), Vector2(0, 1), Vector2(2, 1e-05)]
+}
+
+[sub_resource type="Animation" id="Animation_01w6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coffee:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(360, 340)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coffee:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.670588)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coffee:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ji37b"]
+_data = {
+"RESET": SubResource("Animation_01w6r"),
+"coffee": SubResource("Animation_hbopx")
+}
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_l3gp8"]
 vertices = PackedVector2Array(1112, 2491, -210, 2543, -195, 2056, 1102, 2056, 604, 356, 144, 356, 144, 296, 604, 296, 1004, 1956, -96, 1956, 304, 1816, 864, 1656, 124, 1816, 1004, 696, 1004, 1236, 924, 1236, 704, 1096, 704, 996, 764, 696, 1004, 1336, 864, 1556, 924, 1336, 224, 1256, 224, 1156, 524, 1096, 604, 1556, 604, 1656, 304, 1716, 64, 1576, 64, 1396, 124, 1716, -36, 1256, -36, 1396, 704, 456, 704, 216, 924, 216, 924, 296, 1004, 296, 1004, 436, 924, 436, 924, 536, 764, 596, 224, 616, 224, 516, 1004, 536, 1004, 596, -96, 696, -16, 696, -36, 1156, -16, 616, 524, 996, -36, 516, -36, 596, -96, 596, -96, 216, 44, 216, 44, 456, -36, 1576)
@@ -19,11 +105,23 @@ source_geometry_group_name = &"navigation"
 [node name="Caffe" type="Node2D"]
 
 [node name="NextLevelDoor" parent="." instance=ExtResource("1_0isch")]
-visible = false
+position = Vector2(-762, 597)
+_NextScene = ExtResource("2_ghrxq")
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("1_w4n55")
 _NpcPrefab = ExtResource("5_fqamx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CoffeeQueueManager"]
+libraries = {
+"": SubResource("AnimationLibrary_ji37b")
+}
+
+[node name="Coffee" type="Sprite2D" parent="CoffeeQueueManager"]
+modulate = Color(1, 1, 1, 0.670588)
+position = Vector2(360, 340)
+scale = Vector2(2, 2)
+texture = ExtResource("5_v8op3")
 
 [node name="SpawnPoint" type="Marker2D" parent="CoffeeQueueManager"]
 position = Vector2(922, 1855)
@@ -49,8 +147,8 @@ position = Vector2(410.255, 927.255)
 [node name="QueueSpot3" parent="CoffeeQueueManager/QueueSpots" instance=ExtResource("2_k1qad")]
 position = Vector2(408.255, 1082.25)
 
-[node name="PlayerCoffee" parent="." instance=ExtResource("3_fm1o4")]
-position = Vector2(752, 478)
+[node name="PlayerCoffee" parent="." groups=["player"] instance=ExtResource("3_fm1o4")]
+position = Vector2(1025, 1780)
 
 [node name="TileMap2" type="TileMap" parent="." groups=["navigation"]]
 scale = Vector2(5, 5)

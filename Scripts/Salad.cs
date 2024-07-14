@@ -28,6 +28,16 @@ public partial class Salad : Node2D
 	
 	private float _pickupRadiusSqr = 0;
 	
+	public static Salad GetRandomSalad()
+	{
+		foreach( var new_salad in _SALAD_ARRAY )
+		{
+			if( GD.Randi() % 2 == 0 ) continue;
+			return new_salad;
+		}
+		return null;
+	}
+	
 	public static Salad GetClosestSalad( Vector2 pos )
 	{
 		Salad closest_salad = null;
@@ -136,11 +146,13 @@ public partial class Salad : Node2D
 	
 	private void HandleOnGround( Node2D body )
 	{
+		if( _saladHolder != null ) return;
+		
 		if( body is NPCSalad npc && npc.Salad == null )
 		{
+			_saladHolder = npc;
 			npc.Salad = this;
 			npc.HoldingGun = true;
-			_saladHolder = npc;
 			npc.CanAttack = true;
 			this.Visible = false;
 			_area.CallDeferred( "set", "monitoring", false );

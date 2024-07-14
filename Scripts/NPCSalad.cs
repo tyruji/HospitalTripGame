@@ -4,6 +4,18 @@ using static CharacterStates;
 
 public partial class NPCSalad : NPCTopdown, IAttacker
 {
+	[Export]
+	public float PlayerBounceValue = 900f;
+	
+	[Export]
+	public float PlayerBounceTime = 1f;
+	
+	[Export]
+	public float NpcBounceValue = 500f;
+	
+	[Export]
+	public float NpcBounceTime = 1f;
+	
 	public Salad Salad { get; set; }
 	
 	public bool CanAttack { get; set; } = false;
@@ -53,7 +65,11 @@ public partial class NPCSalad : NPCTopdown, IAttacker
 		if( Salad == null && State != SHOOTING_STATE )
 		{
 			if( _targetSalad == null || _targetSalad.HasOwner )
-				_targetSalad = Salad.GetClosestSalad( GlobalPosition );
+			{
+				if( GD.Randi() % 2 == 0 ) _targetSalad = Salad.GetRandomSalad();
+				else _targetSalad = Salad.GetClosestSalad( GlobalPosition );
+			}
+				
 				
 			if( _targetSalad != null )
 			{
@@ -66,6 +82,24 @@ public partial class NPCSalad : NPCTopdown, IAttacker
 		{
 			Attacking = true;
 		}
+	}
+	
+	private void OnBodyEntered( Node2D body )
+	{
+		Vector2 dir;
+		
+		if( body is NpcCoffee npc && !npc.InQueue )
+		{
+			dir = ( npc.GlobalPosition - GlobalPosition ).Normalized();
+			npc.AddForceImpulse( NpcBounceValue * dir, NpcBounceTime );
+		}
+		
+		if( body is not PlayerTopdown player )// || !InQueue )
+			return;
+
+		dir = ( player.GlobalPosition - GlobalPosition ).Normalized();
+		
+		player.AddForceImpulse( PlayerBounceValue * dir, PlayerBounceTime );
 	}
 	
 	public void Shoot()

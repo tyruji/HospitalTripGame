@@ -116,6 +116,7 @@ public partial class NpcCoffee : NPCTopdown
 				// Get a coffee and leave the queue.
 			TargetPosition = _queueManager.QueueLeavePosition;
 			_gotCoffee = true;
+			Modulate = new Color( 50, 50, 50 );
 			
 			return;
 		}
