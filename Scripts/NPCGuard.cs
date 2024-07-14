@@ -6,6 +6,12 @@ public partial class NPCGuard : NPCTopdown
 	[Export]
 	private Node2D _Sight = null;
 	
+	public override void _Ready()
+	{
+		base._Ready();
+		_Sight = GetNode<Node2D>( "Sight" );
+	}
+	
 	public override void _Process( double delta )
 	{
 		base._Process( delta );

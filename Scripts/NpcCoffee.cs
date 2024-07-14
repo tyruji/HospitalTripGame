@@ -57,6 +57,14 @@ public partial class NpcCoffee : NPCTopdown
 			}
 			if( _targetSpot != null && !InQueue && _targetSpot.Taken ) UpdateTargetQueueSpot();
 		}
+		else if( GlobalPosition.DistanceSquaredTo( _queueManager.QueueLeavePosition )
+					< MinPointDistance * MinPointDistance )
+		{
+			_queueManager.OnQueueAdvance -= UpdateTargetQueueSpot;
+			_queueManager.OnQueueAdvance -= FollowQueueSpot;
+			_queueManager.SpawnNewNpc();
+			 CallDeferred( "queue_free" );
+		}
 		
 		base._Process( delta );
 	}
@@ -93,12 +101,18 @@ public partial class NpcCoffee : NPCTopdown
 	
 	private void UpdateTargetQueueSpot()
 	{
+		if( _gotCoffee )
+		{
+			TargetPosition = _queueManager.QueueLeavePosition;
+			return;
+		}
+		
 		if( TargetQueueIndex >= 0 ) --_queueManager.QueueSpotTargetCount[ TargetQueueIndex ];
 		
-		if( InQueue && TargetQueueIndex <= 0 )
+		if( InQueue && GetSpot( 0 ).QueueOccupator == this  )
 		{
 			TargetQueueIndex = -1;
-			
+			NpcBounceValue = 2 * PlayerBounceValue;
 				// Get a coffee and leave the queue.
 			TargetPosition = _queueManager.QueueLeavePosition;
 			_gotCoffee = true;

@@ -7,9 +7,10 @@ public partial class QueueSpot : Sprite2D
 	
 	public bool Taken { get; private set; } = false;
 	
+	public Node2D QueueOccupator { get; private set; }
+	
 	private CoffeeQueueManager _queueManager = null;
 	
-	private Node2D _queueOccupator = null;
 	
 	public override void _Ready()
 	{
@@ -27,14 +28,14 @@ public partial class QueueSpot : Sprite2D
 		{
 			_queueManager.PlayerQueueIndex = QueueIndex;
 			Taken = true;
-			_queueOccupator = player;
+			QueueOccupator = player;
 			player.Highlight();
 			return;
 		}
 		
 		if( body is not NpcCoffee npc ) return;
 		
-		_queueOccupator = npc;
+		QueueOccupator = npc;
 		npc.InQueue = true;
 		Taken = true;
 		npc.Highlight();
@@ -42,9 +43,9 @@ public partial class QueueSpot : Sprite2D
 
 	private void OnBodyExit( Node2D body )
 	{
-		if( body != _queueOccupator ) return;
+		if( body != QueueOccupator ) return;
 		
-		_queueOccupator = null;
+		QueueOccupator = null;
 		
 		Taken = false;
 		

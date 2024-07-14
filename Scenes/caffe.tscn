@@ -23,6 +23,10 @@ visible = false
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("1_w4n55")
+_NpcPrefab = ExtResource("5_fqamx")
+
+[node name="SpawnPoint" type="Marker2D" parent="CoffeeQueueManager"]
+position = Vector2(922, 1855)
 
 [node name="QueueLeavePoint" type="Marker2D" parent="CoffeeQueueManager"]
 position = Vector2(991, 202)
@@ -114,6 +118,36 @@ position = Vector2(392, 1206)
 
 [node name="NpcCoffee10" parent="NPCs" instance=ExtResource("5_fqamx")]
 position = Vector2(472, 1276)
+
+[node name="NpcCoffee19" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(878, 1420)
+
+[node name="NpcCoffee20" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(679, 1667)
+
+[node name="NpcCoffee21" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(839, 1676)
+
+[node name="NpcCoffee22" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(1017, 1563)
+
+[node name="NpcCoffee23" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(542, 1775)
+
+[node name="NpcCoffee24" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(156, 1647)
+
+[node name="NpcCoffee25" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(149, 1780)
+
+[node name="NpcCoffee26" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(185, 1262)
+
+[node name="NpcCoffee27" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(206, 974)
+
+[node name="NpcCoffee28" parent="NPCs" instance=ExtResource("5_fqamx")]
+position = Vector2(721, 830)
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(106, -46)
