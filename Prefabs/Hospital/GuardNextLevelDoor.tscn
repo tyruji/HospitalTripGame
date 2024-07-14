@@ -17,10 +17,10 @@ void fragment() {
 shader = SubResource("Shader_okcrq")
 
 [node name="GuardNextLevelDoor" type="Node2D"]
+visible = false
 script = ExtResource("1_avljo")
 
 [node name="ScreenDarken" type="ColorRect" parent="."]
-visible = false
 z_index = 530
 custom_minimum_size = Vector2(42069, 42069)
 anchors_preset = 8

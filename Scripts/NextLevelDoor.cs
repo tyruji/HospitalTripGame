@@ -12,6 +12,7 @@ public partial class NextLevelDoor : Node2D
 	
 	public override void _Ready()
 	{
+		_IN_TRANSITION = false;
 		SceneStart();
 		_player = ( PlayerBase ) GetTree().GetFirstNodeInGroup( "player" );
 	}
