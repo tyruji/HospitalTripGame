@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/NextLevelDoor.cs" id="1_f2268"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0qwq"]
-size = Vector2(128, 128)
+size = Vector2(383, 345)
 
 [node name="NextLevelDoor" type="Node2D"]
 visible = false
@@ -23,6 +23,8 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_i0qwq")
