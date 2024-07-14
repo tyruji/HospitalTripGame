@@ -240,7 +240,6 @@ _data = {
 }
 
 [node name="NpcCoffee" type="CharacterBody2D"]
-modulate = Color(1, 1, 0.423529, 1)
 script = ExtResource("1_gp5hm")
 PlayerBounceValue = 900.0
 NpcBounceValue = 500.0
@@ -251,6 +250,7 @@ position = Vector2(0.5, -1)
 shape = SubResource("CircleShape2D_pc2fo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.215902, 0.215902, 0.215902, 1)
 material = SubResource("ShaderMaterial_0t5h6")
 scale = Vector2(4, 4)
 texture = ExtResource("2_63yrq")

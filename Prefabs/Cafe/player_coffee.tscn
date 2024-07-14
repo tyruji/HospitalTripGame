@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/InputHandler.cs" id="3_pxrb0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7t14x"]
-size = Vector2(128, 128)
+size = Vector2(32, 64)
 
 [sub_resource type="Shader" id="Shader_cqhb7"]
 code = "shader_type canvas_item;
@@ -241,7 +241,6 @@ radius = 80.14
 
 [node name="PlayerCoffee" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "Sprite")]
 position = Vector2(565, 372)
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_sc8ar")
 NpcBounceValue = 150.0
 AnimationPlayer = NodePath("AnimationPlayer")
@@ -254,7 +253,7 @@ shape = SubResource("RectangleShape2D_7t14x")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_de500")
 position = Vector2(-1.33514e-05, 1.04904e-05)
-scale = Vector2(8, 8)
+scale = Vector2(4, 4)
 texture = ExtResource("2_g55s0")
 hframes = 4
 vframes = 5

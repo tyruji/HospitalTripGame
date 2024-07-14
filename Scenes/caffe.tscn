@@ -19,7 +19,6 @@ source_geometry_group_name = &"navigation"
 [node name="Caffe" type="Node2D"]
 
 [node name="NextLevelDoor" parent="." instance=ExtResource("1_0isch")]
-visible = false
 
 [node name="CoffeeQueueManager" type="Node" parent="."]
 script = ExtResource("1_w4n55")

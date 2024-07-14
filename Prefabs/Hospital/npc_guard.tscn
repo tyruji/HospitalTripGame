@@ -167,6 +167,7 @@ _data = {
 [node name="NPCGuard" type="CharacterBody2D" node_paths=PackedStringArray("_Sight")]
 script = ExtResource("1_vx7cw")
 _Sight = NodePath("Sight")
+MinPointDistance = 25.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1.5, -2.5)
