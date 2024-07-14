@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7a25kekn6wox"]
+[gd_scene load_steps=15 format=3 uid="uid://b7a25kekn6wox"]
 
 [ext_resource type="Script" path="res://Scripts/NPCGuard.cs" id="1_vx7cw"]
 [ext_resource type="Texture2D" uid="uid://dd0jko4sohmdd" path="res://Graphics/docotor.png" id="2_27hxy"]
-[ext_resource type="Texture2D" uid="uid://b0l7l4d162hqe" path="res://icon.svg" id="2_v65ob"]
-[ext_resource type="PackedScene" uid="uid://inosr4imj748" path="res://Prefabs/next_level_door.tscn" id="3_ugdvu"]
+[ext_resource type="PackedScene" uid="uid://dokl7wjvu2hgh" path="res://Prefabs/Hospital/GuardNextLevelDoor.tscn" id="2_f51hu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
 size = Vector2(31, 59)
@@ -173,26 +172,20 @@ _Sight = NodePath("Sight")
 position = Vector2(1.5, -2.5)
 shape = SubResource("RectangleShape2D_1480h")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("2_27hxy")
-hframes = 3
-vframes = 4
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sight" type="Node2D" parent="."]
 rotation = 4.71239
 
-[node name="NextLevelDoor" parent="Sight" instance=ExtResource("3_ugdvu")]
+[node name="GuardNextLevelDoor" parent="Sight" instance=ExtResource("2_f51hu")]
 visible = false
-position = Vector2(4303, -55.8099)
-scale = Vector2(5.75, 0.41)
+position = Vector2(-230, 0)
 
-[node name="Sprite" type="Sprite2D" parent="Sight"]
-position = Vector2(-366, 2)
-scale = Vector2(5.75, 0.41)
-texture = ExtResource("2_v65ob")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_27hxy")
+hframes = 3
+vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

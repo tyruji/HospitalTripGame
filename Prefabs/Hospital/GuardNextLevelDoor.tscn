@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dokl7wjvu2hgh"]
+
+[ext_resource type="Script" path="res://Scripts/GuardNextLevelDoor.cs" id="1_avljo"]
+[ext_resource type="Texture2D" uid="uid://dmurasncgkefn" path="res://Graphics/enemysight.png" id="2_0x83f"]
+
+[node name="GuardNextLevelDoor" type="Node2D"]
+script = ExtResource("1_avljo")
+
+[node name="ScreenDarken" type="ColorRect" parent="."]
+z_index = 530
+custom_minimum_size = Vector2(42069, 42069)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(233, -1, -256, -249, -256, 250)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.454902)
+scale = Vector2(4, 8)
+texture = ExtResource("2_0x83f")
+
+[connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
