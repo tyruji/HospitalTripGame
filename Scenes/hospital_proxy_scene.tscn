@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkga536sc0bim"]
+
+[sub_resource type="GDScript" id="GDScript_t6ife"]
+script/source = "extends Node2D
+
+func _ready():
+	call_deferred( \"new_scene\" )
+	
+func new_scene():
+	get_tree().change_scene_to_file( \"res://Scenes/hospital.tscn\" )
+"
+
+[node name="HospitalProxyScene" type="Node2D"]
+script = SubResource("GDScript_t6ife")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(420000, 4.2e+06)
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 1)

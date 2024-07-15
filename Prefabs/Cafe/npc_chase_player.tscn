@@ -1,0 +1,239 @@
+[gd_scene load_steps=20 format=3 uid="uid://334lyia1hthf"]
+
+[ext_resource type="Script" path="res://Scripts/NPCChasePlayer.cs" id="1_71x2s"]
+[ext_resource type="Script" path="res://Scripts/NextLevelDoor.cs" id="2_cklmf"]
+[ext_resource type="Texture2D" uid="uid://bw7amluav5csk" path="res://Graphics/circlesight.png" id="3_cay1l"]
+[ext_resource type="PackedScene" uid="uid://dkga536sc0bim" path="res://Scenes/hospital_proxy_scene.tscn" id="3_kgud3"]
+[ext_resource type="Texture2D" uid="uid://dd0jko4sohmdd" path="res://Graphics/docotor.png" id="4_ng5ta"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1480h"]
+size = Vector2(31, 59)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytkj6"]
+radius = 48.7647
+
+[sub_resource type="Shader" id="Shader_okcrq"]
+code = "shader_type canvas_item;
+
+uniform sampler2D screen_texture : hint_screen_texture, repeat_disable, filter_nearest;
+
+void fragment() {
+    vec4 screen_col = textureLod(screen_texture, SCREEN_UV, 0.0);
+	COLOR.a = .5 * step( 0.001, COLOR.a * screen_col.r * screen_col.g * screen_col.b );
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mrb0w"]
+shader = SubResource("Shader_okcrq")
+
+[sub_resource type="Animation" id="Animation_6cf7t"]
+resource_name = "IDLE_left"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="Animation" id="Animation_13s3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bin1k"]
+resource_name = "idle_down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_x58cx"]
+resource_name = "idle_side"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [9]
+}
+
+[sub_resource type="Animation" id="Animation_0ble4"]
+resource_name = "idle_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_bbjlv"]
+resource_name = "left"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 11, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_1bfgg"]
+resource_name = "walk_down"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 5, 3]
+}
+
+[sub_resource type="Animation" id="Animation_s3xlt"]
+resource_name = "walk_side"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 9, 11, 9]
+}
+
+[sub_resource type="Animation" id="Animation_ssrjs"]
+resource_name = "walk_up"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pn7mc"]
+_data = {
+"IDLE_left": SubResource("Animation_6cf7t"),
+"RESET": SubResource("Animation_13s3p"),
+"idle_down": SubResource("Animation_bin1k"),
+"idle_side": SubResource("Animation_x58cx"),
+"idle_up": SubResource("Animation_0ble4"),
+"left": SubResource("Animation_bbjlv"),
+"walk_down": SubResource("Animation_1bfgg"),
+"walk_side": SubResource("Animation_s3xlt"),
+"walk_up": SubResource("Animation_ssrjs")
+}
+
+[node name="NPCChasePlayer" type="CharacterBody2D"]
+position = Vector2(317, 1863)
+script = ExtResource("1_71x2s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -2.5)
+shape = SubResource("RectangleShape2D_1480h")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Sight" type="Node2D" parent="."]
+position = Vector2(0, 11)
+rotation = 1.5708
+
+[node name="NextLevelDoor" type="Node2D" parent="Sight"]
+visible = false
+script = ExtResource("2_cklmf")
+_NextScene = ExtResource("3_kgud3")
+
+[node name="ScreenDarken" type="ColorRect" parent="Sight/NextLevelDoor"]
+z_index = 530
+custom_minimum_size = Vector2(42069, 42069)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Area2D" type="Area2D" parent="Sight/NextLevelDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight/NextLevelDoor/Area2D"]
+shape = SubResource("CircleShape2D_ytkj6")
+
+[node name="Sprite" type="Sprite2D" parent="Sight/NextLevelDoor"]
+modulate = Color(1, 1, 1, 0.454902)
+material = SubResource("ShaderMaterial_mrb0w")
+scale = Vector2(3, 3)
+texture = ExtResource("3_cay1l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("4_ng5ta")
+hframes = 3
+vframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pn7mc")
+}
+
+[connection signal="body_entered" from="Sight/NextLevelDoor/Area2D" to="Sight/NextLevelDoor" method="OnBodyEntered"]
